@@ -5,7 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppLayoutModule } from './modules/shared/app-layout/app-layout.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { ConfigurationService } from './modules/services/configuration.service';
+import { OidcHelperService } from './modules/services/oidc-helper.service';
+import { LocalStoreManager } from './modules/services/local-store-manager.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,11 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient(withFetch()),
+    ConfigurationService,
+    OidcHelperService,
+    LocalStoreManager
   ],
   bootstrap: [AppComponent]
 })
