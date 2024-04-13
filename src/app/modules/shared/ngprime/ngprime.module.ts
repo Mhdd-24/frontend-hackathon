@@ -66,7 +66,8 @@ import { DataViewModule } from 'primeng/dataview';
     SidebarModule,
     InputSwitchModule,
     MenuModule,
-    DataViewModule
+    DataViewModule,
+    PasswordModule
   ]
 })
 export class NgprimeModule { }
