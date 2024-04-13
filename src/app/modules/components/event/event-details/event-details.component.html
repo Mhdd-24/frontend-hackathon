@@ -1,0 +1,53 @@
+<p-table #dt [value]="EventDetailsData" [rows]="5" [paginator]="true"
+  [globalFilterFields]="['id', 'workshopname', 'hallbookingid', 'workshopcategory', 'eventcategory','studenteventregister','studentamount']"
+  [tableStyle]="{ 'min-width': '110rem' }" [rowHover]="true" dataKey="id"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      <h5 class="m-0">Total Events :
+        <p-tag [value]="this.calculateTotalQty.toString()" styleClass="text-2xl"></p-tag>
+      </h5>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+
+        <input pInputText type="text" #textInput (input)="dt.filterGlobal(textInput.value, 'contains')"
+          placeholder="Search..." />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="id" style="min-width:6rem">ID<p-sortIcon field="id"></p-sortIcon>
+      </th>
+      <th pSortableColumn="workshopname" style="min-width:9rem">WorkShop Name<p-sortIcon field="workshopname"></p-sortIcon>
+      </th>
+      <th pSortableColumn="hallbookingid" style="min-width:6rem">Hall Booking ID<p-sortIcon field="hallbookingid"></p-sortIcon>
+      </th>
+      <th pSortableColumn="workshopcategory" style="min-width:12rem">WorkShop Category <p-sortIcon field="workshopcategory"></p-sortIcon>
+      </th>
+      <th pSortableColumn="eventcategory" style="min-width:6rem">Event Category<p-sortIcon field="eventcategory"></p-sortIcon>
+      </th>
+      <th pSortableColumn="studenteventregister" style="min-width:6rem">Student Event Register<p-sortIcon field="studenteventregister"></p-sortIcon>
+      </th>
+      <th pSortableColumn="studentamount" style="min-width:9rem">Student Amount<p-sortIcon field="studentamount"></p-sortIcon>
+      </th>
+      <th>Download</th>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td>{{ product.id }}</td>
+      <td>{{ product.workshopName }}</td>
+      <td>{{ product.hallBookingID }}</td>
+      <td>{{ product.workshopCategory }}</td>
+      <td>{{ product.eventCategory }}</td>
+      <td>{{ product.studentEventRegister }}</td>
+      <td>{{ product.studentAmount}}</td>
+      <td>
+        <button aria-label="downloadBtn" type="button" pButton pRipple icon="pi pi-download" pTooltip="Add Download"
+          class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

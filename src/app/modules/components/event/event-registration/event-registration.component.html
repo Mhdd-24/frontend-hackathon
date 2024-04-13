@@ -1,0 +1,63 @@
+<form [formGroup]="iecForm" (ngSubmit)="load()">
+    <div class="card">
+        <div class="col-12">
+            <h5>Register Event</h5>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="firstname2">Event Name</label>
+                    <input pInputText id="firstname2" type="text" />
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="lastname2">Event Budget</label>
+                    <input pInputText id="lastname2" type="text" />
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="address">Conducted By</label>
+                    <input pInputTextarea id="address" rows="4" />
+                </div>
+                <div class="field col-12 md:col-6">
+                    <label htmlFor="city">Venue</label>
+                    <input pInputText id="city" type="text" />
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="state">Votable</label>
+                    <p-dropdown [options]="dropdownItems" optionLabel="name"></p-dropdown>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="state">Need Volunteers</label>
+                    <p-dropdown [options]="dropdownItems" optionLabel="name"></p-dropdown>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="zip">Date</label>
+                    <input pInputText id="zip" type="text" />
+                </div>
+                <div class="col-12">
+                    <div formArrayName="branches" class="grid">
+                        <div *ngFor="let branch of branches.controls; index as i"
+                            class="fadeinleft fadeout  animation-duration-500 animation-ease-in-out col-11 p-inputgroup p-fluid">
+                            <span [formGroupName]="i" class="p-input-icon-left">
+                                <i class="font-bold">{{i+1}}</i>
+                                <input formControlName="branchName" type="text" pInputText
+                                    placeholder="Enter Checklist" />
+                            </span>
+                            <div class="ml-2">
+                                <p-button icon="pi pi-trash" (onClick)="removeBranch(i)"></p-button>
+                            </div>
+                        </div>
+                        <div class="col-1 text-center">
+                            <p-button icon="pi pi-plus" pTooltip="Add Checklist" tooltipPosition="top"
+                                (onClick)="newBranch()"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Action buttons for Save, Delete, and Reset -->
+    <div class="card flex justify-content-center column-gap-3">
+        <p-button label="Save" type="submit" [loading]="loading"></p-button>
+        <button pButton type="button" label="Delete" [loading]="loading" (click)="load()"></button>
+        <button pButton type="button" label="Reset" [loading]="loading" (click)="resetForm()"></button>
+    </div>
+</form>

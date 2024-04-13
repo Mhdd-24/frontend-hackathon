@@ -1,0 +1,39 @@
+<div class="video-background">
+    <video autoplay muted loop id="bg-video">
+        <source src="your-video.mp4" type="video/mp4">
+        </video>
+    <div class="flex justify-content-center align-items-center" style="min-height: 96vh; width: 100wh;">
+        <div class="card w-full md:w-7 border-round">
+            <p-card header="Inventory Login">
+                <div class="formgrid grid">
+                    <div class="field col-12 md:col-6 mt-3">
+                        <div class="p-float-label">
+                            <input pInputText id="username" type="text"
+                                class="text-base text-color surface-overlay border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                            <label htmlFor="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="field col-12 md:col-6 mt-3">
+                        <div class="p-float-label">
+                            <p-password
+                                styleClass="text-base text-color surface-overlay border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                id="password" [feedback]="false" [toggleMask]="true"></p-password>
+                            <label htmlFor="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="field col-12">
+                        <div class="flex justify-content-end gap-1">
+                            <p-checkbox value="Remeber Me" inputId="rememberMe"></p-checkbox>
+                            <label for="rememberMe">Remember Me</label>
+                        </div>
+                    </div>
+                </div>
+                <ng-template pTemplate="footer">
+                    <div class="flex justify-content-center  gap-1">
+                        <p-button label="Login" icon="pi pi-check"></p-button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+</div>
