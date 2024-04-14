@@ -1,43 +1,67 @@
-<form [formGroup]="iecForm" (ngSubmit)="load()">
+<form [formGroup]="eventRegisterForm" (ngSubmit)="load()">
     <div class="card">
         <div class="col-12">
             <h5>Register Event</h5>
             <div class="p-fluid p-formgrid grid">
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="firstname2">Event Name</label>
-                    <input pInputText id="firstname2" type="text" />
+                <div class="field col-12 md:col-3">
+                    <label htmlFor="eventName">Event Name</label>
+                    <input pInputText id="eventName" type="text" formControlName="eventName" />
+                </div>
+                <div class="field col-12 md:col-3">
+                    <label for="eventBudget">Event Budget</label>
+                    <p-inputNumber formControlName="budget" inputId="eventBudget" [minFractionDigits]="2" currency="INR" currencyDisplay="code"
+                        locale="en-IN" mode="currency"></p-inputNumber>
+                </div>
+                <div class="field col-12 md:col-3">
+                    <label htmlFor="eventFromDate">Event Start</label>
+                    <p-calendar formControlName="eventFromDate" [showIcon]="true" [minDate]="minDate"
+                        [showButtonBar]="true" [showTime]="true" id="eventFromDate" hourFormat="12"></p-calendar>
+                </div>
+                <div class="field col-12 md:col-3">
+                    <label htmlFor="eventToDate">Event End</label>
+                    <p-calendar formControlName="eventToDate" [showIcon]="true" [showButtonBar]="true" id="eventToDate"
+                        [showTime]="true"></p-calendar>
+                </div>
+                <div class="field col-12">
+                    <label htmlFor="eventDescription">Event Description</label>
+                    <textarea formControlName="eventDescription" pInputTextarea id="eventDescription" rows="2" cols="5"
+                        [autoResize]="true"></textarea>
                 </div>
                 <div class="field col-12 md:col-6">
-                    <label htmlFor="lastname2">Event Budget</label>
-                    <input pInputText id="lastname2" type="text" />
+                    <label htmlFor="eventLocation">Venue</label>
+                    <input formControlName="eventLocation" pInputText id="eventLocation" type="text" />
                 </div>
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="address">Conducted By</label>
-                    <input pInputTextarea id="address" rows="4" />
+
+                <div class="field col-12 md:col-3">
+                    <label htmlFor="department">Department</label>
+                    <p-dropdown formControlName="department" [options]="departments" optionLabel="viewValue" id="department"></p-dropdown>
                 </div>
-                <div class="field col-12 md:col-6">
-                    <label htmlFor="city">Venue</label>
-                    <input pInputText id="city" type="text" />
+
+                <div class="field col-12 md:col-3">
+                    <label htmlFor="name">Conducted By</label>
+                    <input formControlName="name" pInputText id="name" type="text" />
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="isVotable">Votable</label>
+                    <p-dropdown formControlName="isVotable" [options]="isVotable" optionLabel="viewValue" id="isVotable"></p-dropdown>
                 </div>
                 <div class="field col-12 md:col-4">
-                    <label htmlFor="state">Votable</label>
-                    <p-dropdown [options]="dropdownItems" optionLabel="name"></p-dropdown>
+                    <label htmlFor="needVolunteer">Need Volunteers</label>
+                    <p-dropdown formControlName="needVolunteer" [options]="needVolunteer" optionLabel="viewValue"
+                        id="needVolunteer"></p-dropdown>
                 </div>
                 <div class="field col-12 md:col-4">
-                    <label htmlFor="state">Need Volunteers</label>
-                    <p-dropdown [options]="dropdownItems" optionLabel="name"></p-dropdown>
-                </div>
-                <div class="field col-12 md:col-4">
-                    <label htmlFor="zip">Date</label>
-                    <input pInputText id="zip" type="text" />
+                    <label htmlFor="isSnacks">Snacks Provided?</label>
+                    <p-dropdown formControlName="isSnacks" [options]="isSnacks" optionLabel="viewValue" id="isSnacks"></p-dropdown>
                 </div>
                 <div class="col-12">
-                    <div formArrayName="branches" class="grid">
-                        <div *ngFor="let branch of branches.controls; index as i"
+                    <div formArrayName="checkLists" class="grid">
+                        <div *ngFor="let branch of checkLists.controls; index as i"
                             class="fadeinleft fadeout  animation-duration-500 animation-ease-in-out col-11 p-inputgroup p-fluid">
                             <span [formGroupName]="i" class="p-input-icon-left">
                                 <i class="font-bold">{{i+1}}</i>
-                                <input formControlName="branchName" type="text" pInputText
+                                <input formControlName="checklistDescription" type="text" pInputText
                                     placeholder="Enter Checklist" />
                             </span>
                             <div class="ml-2">

@@ -1,5 +1,20 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray } from '@angular/forms';
+import { EventRequest } from '../models/event.models';
+import { EventService } from '../services/event.service';
+import { ToastService } from '../../../services/toast.service';
+
+
+interface Department {
+  value: string;
+  viewValue: string;
+}
+
+interface BooleanOption {
+  value: boolean;
+  viewValue: string;
+}
+
 
 @Component({
   selector: 'app-event-registration',
@@ -7,131 +22,161 @@ import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormA
   styleUrl: './event-registration.component.scss'
 })
 export class EventRegistrationComponent {
-  category = [
-    { label: 'New Year', value: 'New Year' },
-    { label: 'Pongal', value: 'Pongal' },
-    { label: 'Valentine Day', value: 'Valentine Day' },
-    { label: 'Holi', value: 'Holi' },
-    { label: 'Ramzan', value: 'Ramzan' },
-    { label: 'Holi', value: 'Holi' },
-    { label: 'Christmas', value: 'Christmas' },
-    { label: 'Diwali', value: 'Diwali' },
-    { label: 'Onam', value: 'Onam' },
-  ];
-  workshopCategory = [
-    { name: 'FlagShip' },
-    { name: 'Gold' },
-    { name: 'Silver' },
-  ];
-  profitLossOptions = [
-    { label: 'Profit', value: 'profit' },
-    { label: 'Loss', value: 'loss' }
-  ];
-  dropdownItems = [
-    { name: 'Option 1', code: 'Option 1' },
-    { name: 'Option 2', code: 'Option 2' },
-    { name: 'Option 3', code: 'Option 3' }
-  ];
-  selectedState: any = null;
+  minDate: Date = new Date();
   loading: boolean = false;
-  iecForm !: FormGroup;
+  eventRegisterForm !: FormGroup;
   isIECFound: boolean = false;
+
+  departments: Department[] = [
+    { value: 'HR', viewValue: 'HR' },
+    { value: 'IT', viewValue: 'IT' },
+    { value: 'Finance', viewValue: 'Finance' },
+    { value: 'Web Portals', viewValue: 'Web Portals' },
+    { value: 'Mobility', viewValue: 'Mobility' },
+    { value: 'Data', viewValue: 'Data' },
+    { value: 'Martech', viewValue: 'Martech' },
+    { value: 'SFDC', viewValue: 'SFDC' }
+  ];
+
+  isVotable: BooleanOption[] = [
+    { value: true, viewValue: 'Yes' },
+    { value: false, viewValue: 'No' }
+  ];
+
+  needVolunteer: BooleanOption[] = [
+    { value: true, viewValue: 'Yes' },
+    { value: false, viewValue: 'No' }
+  ];
+
+  isSnacks: BooleanOption[] = [
+    { value: true, viewValue: 'Yes' },
+    { value: false, viewValue: 'No' }
+  ];
+
+
 
   constructor(
     private formBuilder: FormBuilder,
+    private eventService: EventService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
-    this.iecForm = this.formBuilder.group({
-      iceNumber: new FormControl<string | null>("IEC1234", [Validators.required]),
-      workshopName: ['', Validators.required],
-      registerstudent: [null, [Validators.required, Validators.pattern(/^\d+$/)]],
-      selectedCategory: [null, Validators.required],
-      workshopCategory: [null, Validators.required],
-      amountperstudent: [null, [Validators.required, Validators.min(0)]],
-      expense: ['', [Validators.required, Validators.min(0)]],
-      selectedProfitLoss: ['', Validators.required],
-      halleventbooking: [null, Validators.required],
-      remarks: ['', Validators.required],
-      branches: this.formBuilder.array([
+    this.eventRegisterForm = this.formBuilder.group({
+      eventName: new FormControl<string | null>("Gurukal", [Validators.required]),
+      budget: new FormControl<number | null>(1000, [Validators.required]),
+      eventDescription: new FormControl<string | null>("Knowledge Session", [Validators.required]),
+      eventFromDate: new FormControl<Date | null>(new Date(), [Validators.required]),
+      eventToDate: new FormControl<Date | null>(new Date(), [Validators.required]),
+      eventLocation: new FormControl<string | null>("1st Floor", [Validators.required]),
+      name: new FormControl<string | null>("Jaeson Karter", [Validators.required]),
+      department: new FormControl<Department | null>({ value: 'Web Portals', viewValue: 'Web Portals' }, [Validators.required]),
+      isVotable: new FormControl<BooleanOption | null>({ value: true, viewValue: 'Yes' }, [Validators.required]),
+      isSnacks: new FormControl<BooleanOption | null>({ value: true, viewValue: 'Yes' }, [Validators.required]),
+      needVolunteer: new FormControl<BooleanOption | null>({ value: true, viewValue: 'Yes' }, [Validators.required]),
+      checkLists: this.formBuilder.array([
         this.formBuilder.group({
-          branchCode: new FormControl<string | null>(null),
-          branchName: new FormControl<string | null>("Culcutta"),
-          branchAddress: new FormControl<string | null>(null),
-          active: new FormControl<boolean | null>(null)
-        })
+          checklistDescription: new FormControl<string | null>("Arrange Chairs"),
+          isCompleted: new FormControl<boolean | null>(false)
+        },
+        )
       ])
     })
   }
 
-  get branches(): FormArray {
-    return this.iecForm.get("branches") as FormArray
+  get checkLists(): FormArray {
+    return this.eventRegisterForm.get("checkLists") as FormArray
   }
 
   newBranch() {
-    this.branches.push(
+    this.checkLists.push(
       this.formBuilder.group({
-        branchCode: new FormControl<string | null>(null),
-        branchName: new FormControl<string | null>(null),
-        branchAddress: new FormControl<string | null>(null),
-        active: new FormControl<boolean | null>(null)
+        checklistDescription: new FormControl<string | null>(null),
+        isCompleted: new FormControl<boolean | null>(null)
       })
     )
   }
 
 
   removeBranch(branchIndex: number) {
-    this.branches.removeAt(branchIndex);
+    this.checkLists.removeAt(branchIndex);
   }
 
 
 
   onUpload(event: any) {
     const file = event.files[0];
-    this.iecForm.get('file')?.setValue(file);
+    this.eventRegisterForm.get('file')?.setValue(file);
   }
 
 
   load() {
     this.loading = true;
-    // const iecFormData: IecMaster = {
-    //   iecNumber: this.iecForm.value.iceNumber,
-    //   importerName: this.iecForm.value.importerName,
-    //   gstNumber: this.iecForm.value.gstNumber,
-    //   panNumber: this.iecForm.value.panNumber,
-    //   email: this.iecForm.value.importerEmailId,
-    //   phone: this.iecForm.value.phoneNumber,
-    //   headOfficeAddress: this.iecForm.value.HOAddress,
-    //   active: true,
-    //   iecmasters: this.iecForm.value.branches
-    // }
-    // console.log(this.iecForm.value, iecFormData);
+    console.log("Form Values", this.eventRegisterForm.value);
 
-    // this.iecService.newIecData(iecFormData).subscribe({
-    //   next: (response) => {
-    //     console.log(response);
-    //     this.loading = false;
-    //     this.resetForm();
-    //   },
-    //   error: (error) => {
-    //     console.log(error);
-    //     this.loading = false;
-    //   }
-    // })
+    const eventFormData: EventRequest = {
+      eventName: this.eventRegisterForm.value.eventName,
+      eventDescription: this.eventRegisterForm.value.eventDescription,
+      eventFromDate: this.eventRegisterForm.value.eventFromDate,
+      eventToDate: this.eventRegisterForm.value.eventToDate,
+      eventLocation: this.eventRegisterForm.value.eventLocation,
+      organizer: {
+        empid: "",
+        name: this.eventRegisterForm.value.name,
+        email: '',
+        department: this.eventRegisterForm.value.department.value
+      },
+      department: this.eventRegisterForm.value.department.value,
+      eventType: "Internal",
+      budget: this.eventRegisterForm.value.budget,
+      eventEndTime: "",
+      eventStartTime: "",
+      expenses: {
+        expense1: 0,
+        expense2: 0
+      },
+      isInternalEvent: true,
+      isInvitationRequired: false,
+      isSnacks: this.eventRegisterForm.value.isSnacks.value,
+      isVotable: this.eventRegisterForm.value.isVotable.value,
+      maxAttendees: 100,
+      needVolunteer: this.eventRegisterForm.value.needVolunteer.value,
+      remainingBudget: 0,
+      requiresRSVP: false,
+      status: "Active"
+    }
+
+    console.log(this.eventRegisterForm.value, eventFormData);
+
+    this.eventService.saveEvent(eventFormData).subscribe({
+      next: (response) => {
+        console.log("Response", response);
+        this.loading = false;
+        this.resetForm();
+        this.toastService.showSuccessToast("Event Registered Successfully", "Event ID " + response.eventId);
+      },
+      error: (error) => {
+        console.log("Error", error);
+        this.loading = false;
+        this.toastService.showErrorToast("Error", "Event Registration Failed");
+      }
+    })
+
+
 
   }
 
   resetForm() {
-    this.iecForm.reset();
+    this.eventRegisterForm.reset();
     console.log('Form reset');
   }
 
   get f(): { [key: string]: AbstractControl } {
-    return this.iecForm.controls;
+    return this.eventRegisterForm.controls;
   }
 
   checkError = (controlName: string, errorName: string) => {
-    return this.iecForm.controls[controlName].hasError(errorName) && this.iecForm.controls[controlName].dirty;
+    return this.eventRegisterForm.controls[controlName].hasError(errorName) && this.eventRegisterForm.controls[controlName].dirty;
   }
 
   searchIEC() {
