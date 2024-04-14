@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: new FormControl<string>('jaeson.karter@bajajfinserv.in', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(50)]),
-      password: new FormControl<string>('Pass@123', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]),
+      password: new FormControl<string>('Pass@123', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
       rememberMe: new FormControl<boolean>(false)
     });
   }
@@ -48,7 +48,11 @@ export class LoginComponent implements OnInit {
         if (response.status === "SUCCESS") {
           this.loading = false;
           this.resetForm();
-          this.messageService.showSuccessToast('Success', response.message);
+          if (response.role?.toLowerCase() === 'admin') {
+            this.messageService.showSuccessToast('Success', `${response.message} as ${response.role}`);
+          } else {
+            this.messageService.showSuccessToast('Success', `${response.message}`);
+          }
         }
         else {
           this.loading = false;

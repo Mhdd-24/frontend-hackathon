@@ -5,4 +5,5 @@ export interface UserLoginResponse {
     message: string;
     email: string | null;
     username: string;
+    role: string | null;
 }
