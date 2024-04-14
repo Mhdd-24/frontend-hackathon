@@ -39,3 +39,47 @@ export interface EventRequest {
     remainingBudget: number;
     expenses: Expenses;
 }
+
+interface Employee {
+    empid: string;
+    name: string;
+    email: string;
+}
+
+interface Attendee {
+    employee: Employee;
+    status: null | string;
+    category: string;
+    type: string;
+    feedback: string;
+    isAttending: boolean;
+    isPresent: boolean;
+    rating: string;
+}
+
+export interface AllEventsResponse {
+    id: string;
+    eventId: string;
+    eventName: string;
+    eventDescription: string;
+    eventFromDate: string;
+    eventToDate: string;
+    eventStartTime: string;
+    eventEndTime: string;
+    eventLocation: string;
+    status: string;
+    organizer: Employee;
+    department: string;
+    eventType: string;
+    maxAttendees: number;
+    requiresRSVP: boolean;
+    attendees: Attendee[];
+    attendance: Attendee[];
+    eventInvitationQRCode: string;
+    eventQRCode: string;
+    eventAttendanceQRCode: string;
+    checkList: any[];
+    invitationRequired: boolean;
+    internalEvent: boolean;
+}
+

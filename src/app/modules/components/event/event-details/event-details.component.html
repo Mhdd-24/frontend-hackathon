@@ -1,53 +1,84 @@
-<p-table #dt [value]="EventDetailsData" [rows]="5" [paginator]="true"
-  [globalFilterFields]="['id', 'workshopname', 'hallbookingid', 'workshopcategory', 'eventcategory','studenteventregister','studentamount']"
-  [tableStyle]="{ 'min-width': '110rem' }" [rowHover]="true" dataKey="id"
-  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-  <ng-template pTemplate="caption">
-    <div class="flex align-items-center justify-content-between">
-      <h5 class="m-0">Total Events :
-        <p-tag [value]="this.calculateTotalQty.toString()" styleClass="text-2xl"></p-tag>
-      </h5>
-      <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
+<div class="card">
+  <p-table
+    [globalFilterFields]="['eventName', 'eventLocation', 'eventFromDate', 'eventToDate', 'budget', 'organizer.name', 'status']"
+    #dt [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true" [value]="events"
+    dataKey="eventName" [tableStyle]="{ 'min-width': '100rem' }" [rowHover]="true" [scrollable]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Total Events :
+          <p-tag [value]=" events ? events.length.toString(): '0' " styleClass="text-2xl"></p-tag>
+        </h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" #textInput (input)="dt.filterGlobal(textInput.value.toLowerCase(), 'contains')"
+            placeholder="Search..." />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 5rem"></th>
+        <th pSortableColumn="eventName">Event Name <p-sortIcon field="eventName"></p-sortIcon></th>
+        <th pSortableColumn="eventLocation">Venue<p-sortIcon field="eventLocation"></p-sortIcon></th>
+        <th pSortableColumn="eventFromDate">Event Start <p-sortIcon field="eventFromDate"></p-sortIcon></th>
+        <th pSortableColumn="eventToDate">Event End <p-sortIcon field="eventToDate"></p-sortIcon></th>
+        <th pSortableColumn="budget">Budget <p-sortIcon field="budget"></p-sortIcon></th>
+        <th pSortableColumn="name">Conducted By<p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="status">Status<p-sortIcon field="status"></p-sortIcon></th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-expanded="expanded">
+      <tr>
+        <td>
+          <button type="button" pButton pRipple [pRowToggler]="product"
+            class="p-button-text p-button-rounded p-button-plain"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
+        <td>{{ product.eventName }}</td>
+        <td>{{product.eventLocation}}</td>
+        <td>{{product.eventFromDate | date:'MM/dd/yyyy, h:mm a'}}</td>
+        <td>{{product.eventToDate | date:'MM/dd/yyyy, h:mm a'}}</td>
+        <td>{{ '7883' | currency: 'INR' }}</td>
+        <td>{{ product.organizer.name }}</td>
+        <td>
+          <p-tag [value]="product.status" [severity]="getSeverity(product.status)"></p-tag>
+        </td>
+        <td class="flex gap-1">
+          <button type="button" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"></button>
+          <button type="button" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-product>
+      <tr>
+        <td colspan="7">
+          <div class="p-3">
+            <p-table [value]="product.attendees" dataKey="name">
+              <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">Employee Name <p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="email">Employee Email <p-sortIcon field="email"></p-sortIcon></th>
 
-        <input pInputText type="text" #textInput (input)="dt.filterGlobal(textInput.value, 'contains')"
-          placeholder="Search..." />
-      </span>
-    </div>
-  </ng-template>
-  <ng-template pTemplate="header">
-    <tr>
-      <th pSortableColumn="id" style="min-width:6rem">ID<p-sortIcon field="id"></p-sortIcon>
-      </th>
-      <th pSortableColumn="workshopname" style="min-width:9rem">WorkShop Name<p-sortIcon field="workshopname"></p-sortIcon>
-      </th>
-      <th pSortableColumn="hallbookingid" style="min-width:6rem">Hall Booking ID<p-sortIcon field="hallbookingid"></p-sortIcon>
-      </th>
-      <th pSortableColumn="workshopcategory" style="min-width:12rem">WorkShop Category <p-sortIcon field="workshopcategory"></p-sortIcon>
-      </th>
-      <th pSortableColumn="eventcategory" style="min-width:6rem">Event Category<p-sortIcon field="eventcategory"></p-sortIcon>
-      </th>
-      <th pSortableColumn="studenteventregister" style="min-width:6rem">Student Event Register<p-sortIcon field="studenteventregister"></p-sortIcon>
-      </th>
-      <th pSortableColumn="studentamount" style="min-width:9rem">Student Amount<p-sortIcon field="studentamount"></p-sortIcon>
-      </th>
-      <th>Download</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-employee>
+      <tr>
+        <td>{{ employee.employee.name }}</td>
+        <td>{{ employee.employee.email }}</td>
 
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-product>
-    <tr>
-      <td>{{ product.id }}</td>
-      <td>{{ product.workshopName }}</td>
-      <td>{{ product.hallBookingID }}</td>
-      <td>{{ product.workshopCategory }}</td>
-      <td>{{ product.eventCategory }}</td>
-      <td>{{ product.studentEventRegister }}</td>
-      <td>{{ product.studentAmount}}</td>
-      <td>
-        <button aria-label="downloadBtn" type="button" pButton pRipple icon="pi pi-download" pTooltip="Add Download"
-          class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
-      </td>
-    </tr>
-  </ng-template>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6">There are no attendees for this event yet.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+</td>
+</tr>
+</ng-template>
 </p-table>
+</div>
