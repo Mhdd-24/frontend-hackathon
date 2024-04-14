@@ -11,6 +11,8 @@ import { OidcHelperService } from './modules/services/oidc-helper.service';
 import { LocalStoreManager } from './modules/services/local-store-manager.service';
 import { MessageService } from 'primeng/api';
 import { NgprimeModule } from './modules/shared/ngprime/ngprime.module';
+import { authGuard } from './auth/auth.guard';
+import { AuthService } from './modules/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { NgprimeModule } from './modules/shared/ngprime/ngprime.module';
     ConfigurationService,
     OidcHelperService,
     LocalStoreManager,
-    MessageService
+    MessageService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
