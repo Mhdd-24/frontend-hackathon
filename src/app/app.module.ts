@@ -9,6 +9,8 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { ConfigurationService } from './modules/services/configuration.service';
 import { OidcHelperService } from './modules/services/oidc-helper.service';
 import { LocalStoreManager } from './modules/services/local-store-manager.service';
+import { MessageService } from 'primeng/api';
+import { NgprimeModule } from './modules/shared/ngprime/ngprime.module';
 
 @NgModule({
   declarations: [
@@ -19,14 +21,16 @@ import { LocalStoreManager } from './modules/services/local-store-manager.servic
     AppRoutingModule,
     BrowserAnimationsModule,
     AppLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    NgprimeModule
   ],
   providers: [
     provideClientHydration(),
     provideHttpClient(withFetch()),
     ConfigurationService,
     OidcHelperService,
-    LocalStoreManager
+    LocalStoreManager,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

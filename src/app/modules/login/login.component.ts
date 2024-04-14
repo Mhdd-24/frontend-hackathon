@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '../shared/app-layout/services/layout.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { MessageService } from 'primeng/api';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
-  providers: [AuthService, MessageService],
+  providers: [AuthService],
 })
 export class LoginComponent implements OnInit {
   password!: string;
   loading = false;
   loginForm !: FormGroup;
 
-  constructor(public layoutService: LayoutService, private formBuilder: FormBuilder, private authService: AuthService, private messageService : MessageService) { }
+  constructor(public layoutService: LayoutService, private formBuilder: FormBuilder, private authService: AuthService, private messageService: ToastService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -48,10 +48,11 @@ export class LoginComponent implements OnInit {
         if (response.status === "SUCCESS") {
           this.loading = false;
           this.resetForm();
+          this.messageService.showSuccessToast('Success', response.message);
         }
-        else{
+        else {
           this.loading = false;
-          this.messageService.add({severity:'error', summary: 'Error', detail: response.message});
+          this.messageService.showErrorToast('Error', response.message);
         }
       },
       error: (error) => {

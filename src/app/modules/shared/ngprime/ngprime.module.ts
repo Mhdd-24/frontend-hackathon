@@ -32,6 +32,8 @@ import { MenuModule } from 'primeng/menu';
 
 import { DataViewModule } from 'primeng/dataview';
 
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { DataViewModule } from 'primeng/dataview';
     InputSwitchModule,
     MenuModule,
     DataViewModule,
-    PasswordModule
+    PasswordModule,
+    MessagesModule,
+    MessageModule
   ]
 })
 export class NgprimeModule { }
