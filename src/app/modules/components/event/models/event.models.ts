@@ -11,9 +11,8 @@ interface Organizer {
     department: string;
 }
 
-interface Expenses {
-    expense1: number;
-    expense2: number;
+export interface Expenses {
+    [key: string]: number;
 }
 
 export interface EventRequest {
@@ -24,37 +23,50 @@ export interface EventRequest {
     eventStartTime: string;
     eventEndTime: string;
     eventLocation: string;
-    organizer: Organizer;
+    status: string;
+    organizer: EmpDto;
     department: string;
     eventType: string;
     maxAttendees: number;
     requiresRSVP: boolean;
     isInternalEvent: boolean;
-    status: string;
     isInvitationRequired: boolean;
     isVotable: boolean;
     isSnacks: boolean;
     needVolunteer: boolean;
+    attendees: AttendeesDto[]; // who is attending and not attending
+    attendance: AttendeesDto[]; // once event complete the survey will be added here
+    volunteer: AttendeesDto[]; // volunteer
+    eventInvitationQRCode: string;
+    eventQRCode: string;
+    eventAttendanceQRCode: string;
     budget: number;
     remainingBudget: number;
-    expenses: Expenses;
+    expenses: Expenses[];
+    checkLists: CheckList[];
+
 }
 
-interface Employee {
-    empid: string;
-    name: string;
-    email: string;
+interface CheckList {
+    isCompleted: boolean;
+    checklistDescription: string;
 }
 
-interface Attendee {
-    employee: Employee;
-    status: null | string;
-    category: string;
-    type: string;
+export interface AttendeesDto {
+    employee: EmpDto;
+    status: string;
+    category: string; // can be invitation or feedback
+    type: string; // can be event with feedback, event without feedback
     feedback: string;
     isAttending: boolean;
     isPresent: boolean;
     rating: string;
+}
+
+export interface EmpDto {
+    empid: string;
+    name: string;
+    email: string;
 }
 
 export interface AllEventsResponse {
@@ -68,18 +80,25 @@ export interface AllEventsResponse {
     eventEndTime: string;
     eventLocation: string;
     status: string;
-    organizer: Employee;
+    organizer: Organizer;
     department: string;
     eventType: string;
     maxAttendees: number;
     requiresRSVP: boolean;
-    attendees: Attendee[];
-    attendance: Attendee[];
+    needVolunteer: boolean;
+    attendees: AttendeesDto[];
+    attendance: AttendeesDto[];
+    volunteer: AttendeesDto[];
     eventInvitationQRCode: string;
     eventQRCode: string;
     eventAttendanceQRCode: string;
-    checkList: any[];
+    budget: number;
+    remainingBudget: number;
+    expenses: Expenses;
+    checkLists: CheckList[];
     invitationRequired: boolean;
     internalEvent: boolean;
+    snacks: boolean;
+    votable: boolean;
 }
 

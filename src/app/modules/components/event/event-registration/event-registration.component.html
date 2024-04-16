@@ -74,6 +74,29 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div formArrayName="expenses" class="grid">
+                        <div *ngFor="let branch of expenses.controls; index as i"
+                            class="fadeinleft fadeout  animation-duration-500 animation-ease-in-out p-inputgroup p-fluid col-11">
+                            <span [formGroupName]="i" class="p-input-icon-left">
+                                <i class="font-bold">{{i+1}}</i>
+                                <input formControlName="expense" type="text" pInputText
+                                    placeholder="Enter Exnpense" />                        
+                            </span>
+                            <span [formGroupName]="i">
+                                <input type="number" formControlName="amount" pInputText placeholder="Enter Amount" />
+                            </span>
+
+                            <div class="ml-2">
+                                <p-button icon="pi pi-trash" (onClick)="removeExpense(i)"></p-button>
+                            </div>
+                        </div>
+                        <div class="col-1 text-center">
+                            <p-button icon="pi pi-plus" pTooltip="Add Expense" tooltipPosition="top"
+                                (onClick)="newExpense()"></p-button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

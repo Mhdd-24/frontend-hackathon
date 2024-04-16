@@ -35,4 +35,13 @@ export class EventEndpointService extends EndpointBase {
       )
     )
   }
+
+  getEventById(id: string): Observable<AllEventsResponse> {
+    return this.http.get<AllEventsResponse>(`${this.saveEventURL}?id=${id}`, this.requestHeaders).pipe(
+      catchError(error => {
+        return this.handleError(error, () => this.getEventById(id));
+      }
+      )
+    )
+  }
 }

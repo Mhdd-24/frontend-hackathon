@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product, SelectItem } from '../models/eventVolunteer.model';
 import { DataView } from 'primeng/dataview';
+import { AllEventsResponse } from '../models/event.models';
+import { EventService } from '../services/event.service';
 @Component({
   selector: 'app-event-volunteer',
   templateUrl: './event-volunteer.component.html',
   styleUrl: './event-volunteer.component.scss'
 })
-export class EventVolunteerComponent {
+export class EventVolunteerComponent implements OnInit {
 
   products: Product[] = [
     {
@@ -371,11 +373,29 @@ export class EventVolunteerComponent {
     }
   ]
 
+  events !: AllEventsResponse[];
+
   sortOptions: SelectItem[] = [];
 
   sortOrder: number = 0;
 
   sortField: string = '';
+
+  constructor(private eventService: EventService) { }
+
+  ngOnInit(): void {
+    this.eventService.getAllEvents().subscribe({
+      next: (events) => {
+        this.events = events;
+        console.log(events);
+        //Filter Events only those need volunteers
+        this.events = this.events.filter(event => event.needVolunteer);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
 
   onSortChange(event: any) {
     const value = event.value;

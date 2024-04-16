@@ -21,4 +21,10 @@ export class EventService {
       return res;
     }))
   }
+
+  getEventById (id: string): Observable<AllEventsResponse> {
+    return this.eventEndPointService.getEventById(id).pipe<AllEventsResponse>(map(res => {
+      return res;
+    }))
+  }
 }
