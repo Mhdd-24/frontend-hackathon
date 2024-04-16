@@ -32,6 +32,9 @@ export class MenuComponent implements OnInit {
               },
               {
                 label: 'Manage Events', icon: 'pi pi-fw pi-database', routerLink: ['/event/eventDetails'],
+              },
+              {
+                label: 'Event Invitation', icon: 'pi pi-fw pi-bookmark-fill', routerLink: ['/event/inviationEvent'],
               }
             ]
           },

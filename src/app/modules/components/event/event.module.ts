@@ -6,13 +6,15 @@ import { EventVolunteerComponent } from './event-volunteer/event-volunteer.compo
 import { NgprimeModule } from '../../shared/ngprime/ngprime.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SuggestEventComponent } from './suggest-event/suggest-event.component';
+import { InvitationEventComponent } from './invitation-event/invitation-event.component';
 
 
 @NgModule({
   declarations: [
 
     EventVolunteerComponent,
-    SuggestEventComponent
+    SuggestEventComponent,
+    InvitationEventComponent
   ],
   imports: [
     CommonModule,

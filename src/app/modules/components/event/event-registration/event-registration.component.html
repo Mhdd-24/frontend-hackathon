@@ -1,3 +1,72 @@
+@if(isEditMode){
+<div class="grid">
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Total Attendees</span>
+                    <div class="text-900 font-medium text-xl">152</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                </div>
+            </div>
+            <span class="text-green-500 font-medium">24 new </span>
+            <span class="text-500">since last visit</span>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Remaining Budget</span>
+                    <div class="text-900 font-medium text-xl">Rs 22343434</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-map-marker text-orange-500 text-xl"></i>
+                </div>
+            </div>
+            <span class="text-green-500 font-medium">%52+ </span>
+            <span class="text-500">since last week</span>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Invitation Accepeted</span>
+                    <div class="text-900 font-medium text-xl">300</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+                </div>
+            </div>
+            <span class="text-green-500 font-medium">520 </span>
+            <span class="text-500">newly registered</span>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3">Remaining  Budget</span>
+                    <div class="text-900 font-medium text-xl">152</div>
+                </div>
+                <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
+                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                    <i class="pi pi-comment text-purple-500 text-xl"></i>
+                </div>
+            </div>
+            <span class="text-green-500 font-medium">85 </span>
+            <span class="text-500">responded</span>
+        </div>
+    </div>
+</div>
+}
+
 <form [formGroup]="eventRegisterForm" (ngSubmit)="load()">
     <div class="card">
         <div class="col-12">
@@ -9,8 +78,8 @@
                 </div>
                 <div class="field col-12 md:col-3">
                     <label for="eventBudget">Event Budget</label>
-                    <p-inputNumber formControlName="budget" inputId="eventBudget" [minFractionDigits]="2" currency="INR" currencyDisplay="code"
-                        locale="en-IN" mode="currency"></p-inputNumber>
+                    <p-inputNumber formControlName="budget" inputId="eventBudget" [minFractionDigits]="2" currency="INR"
+                        currencyDisplay="code" locale="en-IN" mode="currency"></p-inputNumber>
                 </div>
                 <div class="field col-12 md:col-3">
                     <label htmlFor="eventFromDate">Event Start</label>
@@ -34,7 +103,8 @@
 
                 <div class="field col-12 md:col-3">
                     <label htmlFor="department">Department</label>
-                    <p-dropdown formControlName="department" [options]="departments" optionLabel="viewValue" id="department"></p-dropdown>
+                    <p-dropdown formControlName="department" [options]="departments" optionLabel="viewValue"
+                        id="department"></p-dropdown>
                 </div>
 
                 <div class="field col-12 md:col-3">
@@ -44,7 +114,8 @@
 
                 <div class="field col-12 md:col-4">
                     <label htmlFor="isVotable">Votable</label>
-                    <p-dropdown formControlName="isVotable" [options]="isVotable" optionLabel="viewValue" id="isVotable"></p-dropdown>
+                    <p-dropdown formControlName="isVotable" [options]="isVotable" optionLabel="viewValue"
+                        id="isVotable"></p-dropdown>
                 </div>
                 <div class="field col-12 md:col-4">
                     <label htmlFor="needVolunteer">Need Volunteers</label>
@@ -53,7 +124,8 @@
                 </div>
                 <div class="field col-12 md:col-4">
                     <label htmlFor="isSnacks">Snacks Provided?</label>
-                    <p-dropdown formControlName="isSnacks" [options]="isSnacks" optionLabel="viewValue" id="isSnacks"></p-dropdown>
+                    <p-dropdown formControlName="isSnacks" [options]="isSnacks" optionLabel="viewValue"
+                        id="isSnacks"></p-dropdown>
                 </div>
                 <div class="col-12">
                     <div formArrayName="checkLists" class="grid">
@@ -80,8 +152,7 @@
                             class="fadeinleft fadeout  animation-duration-500 animation-ease-in-out p-inputgroup p-fluid col-11">
                             <span [formGroupName]="i" class="p-input-icon-left">
                                 <i class="font-bold">{{i+1}}</i>
-                                <input formControlName="expense" type="text" pInputText
-                                    placeholder="Enter Exnpense" />                        
+                                <input formControlName="expense" type="text" pInputText placeholder="Enter Exnpense" />
                             </span>
                             <span [formGroupName]="i">
                                 <input type="number" formControlName="amount" pInputText placeholder="Enter Amount" />
