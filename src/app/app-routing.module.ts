@@ -8,6 +8,8 @@ const routes: Routes = [
     path: '', component: AppLayoutComponent, children: [
       { path: 'event', loadChildren: () => import('./modules/components/event/event.module').then(m => m.EventModule) },
       { path: 'dashboard', loadChildren: () => import('./modules/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'leaveRoster', loadChildren: () => import('./modules/components/leave-roster/leave-roster.module').then(m => m.LeaveRosterModule) },
+
     ],
     canActivate: [authGuard]
   },

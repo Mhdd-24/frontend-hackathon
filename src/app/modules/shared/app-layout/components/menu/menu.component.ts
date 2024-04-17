@@ -47,6 +47,16 @@ export class MenuComponent implements OnInit {
         ]
       },
       {
+        label: 'Leave Roster',
+        items: [
+          {
+            label: 'Fetch Leave', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/leaveRoster/uploadLeaves'],
+          },
+         
+        ]
+
+      },
+      {
         label: 'Food Order',
         items: [
           {
