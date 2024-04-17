@@ -33,26 +33,6 @@ export class LocalStoreManager {
       'clearAllSessionsStorage'
     ];
 
-  public initialiseStorageSyncListener() {
-    if (LocalStoreManager.syncListenerInitialised === true) {
-      return;
-    }
-
-    LocalStoreManager.syncListenerInitialised = true;
-    window.addEventListener('storage', this.sessionStorageTransferHandler, false);
-    this.syncSessionStorage();
-  }
-
-  public deinitialiseStorageSyncListener() {
-    window.removeEventListener('storage', this.sessionStorageTransferHandler, false);
-    LocalStoreManager.syncListenerInitialised = false;
-  }
-
-  public clearAllStorage() {
-    this.clearAllSessionsStorage();
-    this.clearLocalStorage();
-  }
-
   public clearAllSessionsStorage() {
     this.clearInstanceSessionStorage();
     localStorage.removeItem(LocalStoreManager.DBKEY_SYNC_KEYS);

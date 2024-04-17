@@ -32,6 +32,9 @@ export class MenuComponent implements OnInit {
               },
               {
                 label: 'Manage Events', icon: 'pi pi-fw pi-database', routerLink: ['/event/eventDetails'],
+              },
+              {
+                label: 'Event Invitation', icon: 'pi pi-fw pi-bookmark-fill', routerLink: ['/event/inviationEvent'],
               }
             ]
           },
@@ -42,6 +45,16 @@ export class MenuComponent implements OnInit {
             label: 'Event Suggestion', icon: 'pi pi-fw pi-megaphone', routerLink: ['/event/eventSuggestion'],
           },
         ]
+      },
+      {
+        label: 'Leave Roster',
+        items: [
+          {
+            label: 'Fetch Leave', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/leaveRoster/uploadLeaves'],
+          },
+         
+        ]
+
       },
       {
         label: 'Food Order',

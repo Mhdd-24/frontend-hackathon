@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Product, SelectItem } from '../models/eventVolunteer.model';
-import { DataView } from 'primeng/dataview';
-import { AllEventsResponse, EventUpdateBody } from '../models/event.models';
+import { Component } from '@angular/core';
+import { SelectItem } from 'primeng/api';
+import { AllEventsResponse } from '../models/event.models';
+import { Product } from '../models/eventVolunteer.model';
 import { EventService } from '../services/event.service';
-import { AuthService } from '../../../services/auth.service';
-import { ToastService } from '../../../services/toast.service';
+
 @Component({
-  selector: 'app-event-volunteer',
-  templateUrl: './event-volunteer.component.html',
-  styleUrl: './event-volunteer.component.scss'
+  selector: 'app-invitation-event',
+  templateUrl: './invitation-event.component.html',
+  styleUrl: './invitation-event.component.scss'
 })
-export class EventVolunteerComponent implements OnInit {
+export class InvitationEventComponent {
 
   products: Product[] = [
     {
@@ -383,7 +382,7 @@ export class EventVolunteerComponent implements OnInit {
 
   sortField: string = '';
 
-  constructor(private eventService: EventService, private authService: AuthService, private toastService : ToastService) { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
     this.eventService.getAllEvents().subscribe({
@@ -391,7 +390,7 @@ export class EventVolunteerComponent implements OnInit {
         this.events = events;
         console.log(events);
         //Filter Events only those need volunteers
-        this.events = this.events.filter(event => event.needVolunteer);
+
       },
       error: (error) => {
         console.log(error);
@@ -410,36 +409,5 @@ export class EventVolunteerComponent implements OnInit {
       this.sortField = value;
     }
   }
-
-  onFilter(dv: DataView, event: Event) {
-    dv.filter((event.target as HTMLInputElement).value);
-  }
-
-  onVolunteerForEvent(event: AllEventsResponse) {
-    console.log("Event", event);
-
-    const volunteer: EventUpdateBody = {
-      eventId: event.eventId,
-      employeeMail: this.authService.currentUser?.email as string,
-      category: "Volunteer",
-      type: "Event with feedback",
-      feedback: "",
-      isAttending: true,
-      isPresent: false,
-      rating: ""
-    }
-
-    this.eventService.upDateEvent(volunteer).subscribe({
-      next: (response) => {
-
-        this.toastService.showSuccessToast("You have successfully volunteered for the event", "");
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
-
-  }
-
 
 }

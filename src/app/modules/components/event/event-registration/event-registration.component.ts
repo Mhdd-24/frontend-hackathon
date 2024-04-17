@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray } from '@angular/forms';
-import { EventRequest } from '../models/event.models';
+import { EventRequest, Expenses } from '../models/event.models';
 import { EventService } from '../services/event.service';
 import { ToastService } from '../../../services/toast.service';
 
@@ -22,10 +22,12 @@ interface BooleanOption {
   styleUrl: './event-registration.component.scss'
 })
 export class EventRegistrationComponent {
+  @Input() id?: string;
   minDate: Date = new Date();
   loading: boolean = false;
   eventRegisterForm !: FormGroup;
   isIECFound: boolean = false;
+  isEditMode = false;
 
   departments: Department[] = [
     { value: 'HR', viewValue: 'HR' },
@@ -63,24 +65,78 @@ export class EventRegistrationComponent {
 
   ngOnInit() {
     this.eventRegisterForm = this.formBuilder.group({
-      eventName: new FormControl<string | null>("Gurukal", [Validators.required]),
-      budget: new FormControl<number | null>(1000, [Validators.required]),
-      eventDescription: new FormControl<string | null>("Knowledge Session", [Validators.required]),
-      eventFromDate: new FormControl<Date | null>(new Date(), [Validators.required]),
-      eventToDate: new FormControl<Date | null>(new Date(), [Validators.required]),
-      eventLocation: new FormControl<string | null>("1st Floor", [Validators.required]),
-      name: new FormControl<string | null>("Jaeson Karter", [Validators.required]),
-      department: new FormControl<Department | null>({ value: 'Web Portals', viewValue: 'Web Portals' }, [Validators.required]),
-      isVotable: new FormControl<BooleanOption | null>({ value: true, viewValue: 'Yes' }, [Validators.required]),
-      isSnacks: new FormControl<BooleanOption | null>({ value: true, viewValue: 'Yes' }, [Validators.required]),
-      needVolunteer: new FormControl<BooleanOption | null>({ value: true, viewValue: 'Yes' }, [Validators.required]),
+      eventName: new FormControl<string | null>(null, [Validators.required]),
+      budget: new FormControl<number | null>(null, [Validators.required]),
+      eventDescription: new FormControl<string | null>(null, [Validators.required]),
+      eventFromDate: new FormControl<Date | null>(null, [Validators.required]),
+      eventToDate: new FormControl<Date | null>(null, [Validators.required]),
+      eventLocation: new FormControl<string | null>(null, [Validators.required]),
+      name: new FormControl<string | null>(null, [Validators.required]),
+      department: new FormControl<Department | null>(null, [Validators.required]),
+      isVotable: new FormControl<BooleanOption | null>(null, [Validators.required]),
+      isSnacks: new FormControl<BooleanOption | null>(null, [Validators.required]),
+      needVolunteer: new FormControl<BooleanOption | null>(null, [Validators.required]),
       checkLists: this.formBuilder.array([
         this.formBuilder.group({
-          checklistDescription: new FormControl<string | null>("Arrange Chairs"),
+          checklistDescription: new FormControl<string | null>(null),
           isCompleted: new FormControl<boolean | null>(false)
         },
         )
-      ])
+      ]),
+      expenses: this.formBuilder.array([
+        this.formBuilder.group({
+          expense: new FormControl<number | null>(null),
+          amount: new FormControl<number | null>(null)
+        })
+
+      ]),
+    })
+
+
+    this.eventService.getEventById(this.id!).subscribe({
+      next: (event) => {
+        this.isEditMode = true;
+        console.log(event);
+        this.eventRegisterForm.patchValue({
+          ...event,
+          eventFromDate: new Date(event.eventFromDate),
+          eventToDate: new Date(event.eventToDate),
+          department: this.departments.find(department => department.value === event.department),
+          name: event.organizer.name,
+          isVotable: this.isVotable.find(votable => votable.value === event.votable),
+          isSnacks: this.isSnacks.find(snacks => snacks.value === event.snacks),
+          needVolunteer: this.needVolunteer.find(volunteer => volunteer.value === event.needVolunteer),
+          expenses : null
+        });
+
+        if (event.checkLists.length > 1) {
+          for (let i = 1; i < event.checkLists.length; i++) {
+            this.checkLists.push(
+              this.formBuilder.group({
+                checklistDescription: new FormControl<string | null>(event.checkLists[i].checklistDescription),
+                isCompleted: new FormControl<boolean | null>(event.checkLists[i].isCompleted)
+              })
+            )
+          }
+        }
+
+        if(event.expenses) {
+          this.removeExpense(0);
+          Object.keys(event.expenses).forEach((key) => {
+            this.expenses.push(
+              this.formBuilder.group({
+                expense: new FormControl<string | null>(key),
+                amount: new FormControl<number | null>(event.expenses[key])
+              })
+            )
+          })
+        }
+
+
+      },
+      error: (error) => {
+        console.log(error);
+      }
     })
   }
 
@@ -92,9 +148,26 @@ export class EventRegistrationComponent {
     this.checkLists.push(
       this.formBuilder.group({
         checklistDescription: new FormControl<string | null>(null),
-        isCompleted: new FormControl<boolean | null>(null)
+        isCompleted: new FormControl<boolean | null>(false)
       })
     )
+  }
+
+  newExpense() {
+    this.expenses.push(
+      this.formBuilder.group({
+        expense: new FormControl<number | null>(null),
+        amount: new FormControl<number | null>(null)
+      })
+    )
+  }
+
+  get expenses(): FormArray {
+    return this.eventRegisterForm.get("expenses") as FormArray
+  }
+
+  removeExpense(expenseIndex: number) {
+    this.expenses.removeAt(expenseIndex);
   }
 
 
@@ -113,6 +186,12 @@ export class EventRegistrationComponent {
   load() {
     this.loading = true;
     console.log("Form Values", this.eventRegisterForm.value);
+    let expensesObj : any = {}
+    this.eventRegisterForm.value.expenses.forEach((expense: any) => {
+      expensesObj[expense.expense] = expense.amount;
+    })
+
+    console.log(expensesObj);
 
     const eventFormData: EventRequest = {
       eventName: this.eventRegisterForm.value.eventName,
@@ -124,18 +203,12 @@ export class EventRegistrationComponent {
         empid: "",
         name: this.eventRegisterForm.value.name,
         email: '',
-        department: this.eventRegisterForm.value.department.value
       },
       department: this.eventRegisterForm.value.department.value,
       eventType: "Internal",
       budget: this.eventRegisterForm.value.budget,
       eventEndTime: "",
       eventStartTime: "",
-      expenses: {
-        expense1: 0,
-        expense2: 0
-      },
-      isInternalEvent: true,
       isInvitationRequired: false,
       isSnacks: this.eventRegisterForm.value.isSnacks.value,
       isVotable: this.eventRegisterForm.value.isVotable.value,
@@ -143,7 +216,17 @@ export class EventRegistrationComponent {
       needVolunteer: this.eventRegisterForm.value.needVolunteer.value,
       remainingBudget: 0,
       requiresRSVP: false,
-      status: "Active"
+      status: "Active",
+      attendance: [],
+      attendees: [],
+      volunteer: [],
+      eventAttendanceQRCode: "",
+      eventInvitationQRCode: "",
+      eventQRCode: "",
+      checkLists: this.eventRegisterForm.value.checkLists,
+      isInternalEvent: true,
+      expenses : expensesObj
+
     }
 
     console.log(this.eventRegisterForm.value, eventFormData);

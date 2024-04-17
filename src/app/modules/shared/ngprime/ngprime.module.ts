@@ -35,6 +35,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   declarations: [],
@@ -71,7 +72,8 @@ import { MessageModule } from 'primeng/message';
     DataViewModule,
     PasswordModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    AccordionModule
   ]
 })
 export class NgprimeModule { }

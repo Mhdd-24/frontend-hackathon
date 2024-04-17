@@ -9,7 +9,7 @@ const routes: Routes = [
       { path: 'event', loadChildren: () => import('./modules/components/event/event.module').then(m => m.EventModule) },
       { path: 'dashboard', loadChildren: () => import('./modules/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'food', loadChildren: () => import('./modules/components/food-count/food-count.module').then(m => m.FoodCountModule) },
-
+      { path: 'leaveRoster', loadChildren: () => import('./modules/components/leave-roster/leave-roster.module').then(m => m.LeaveRosterModule) },
     ],
     // canActivate: [authGuard]
   },
@@ -19,7 +19,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    bindToComponentInputs: true
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

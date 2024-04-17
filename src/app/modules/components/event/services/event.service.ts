@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EventEndpointService } from './event-endpoint.service';
 import { Observable, map } from 'rxjs';
-import { AllEventsResponse, EventRequest, eventSaveResponse } from '../models/event.models';
+import { AllEventsResponse, EventRequest, EventUpdateBody, eventSaveResponse } from '../models/event.models';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,18 @@ export class EventService {
 
   getAllEvents(): Observable<AllEventsResponse[]> {
     return this.eventEndPointService.getAllEvents().pipe<AllEventsResponse[]>(map(res => {
+      return res;
+    }))
+  }
+
+  getEventById(id: string): Observable<AllEventsResponse> {
+    return this.eventEndPointService.getEventById(id).pipe<AllEventsResponse>(map(res => {
+      return res;
+    }))
+  }
+
+  upDateEvent(event: EventUpdateBody): Observable<eventSaveResponse> {
+    return this.eventEndPointService.updateEvent(event).pipe<eventSaveResponse>(map(res => {
       return res;
     }))
   }
