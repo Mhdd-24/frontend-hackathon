@@ -24,8 +24,7 @@ export class ToastService {
         this.showToast(summary, detail, 'warn');
     }
 
-    async showErrorToast(summary: string,
-        detail: string): Promise<void> {
+    async showErrorToast(summary: string, detail: string): Promise<void> {
         this.showToast(summary, detail, 'error');
     }
 
