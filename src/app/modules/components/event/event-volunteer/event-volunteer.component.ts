@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, SelectItem } from '../models/eventVolunteer.model';
 import { DataView } from 'primeng/dataview';
-import { AllEventsResponse } from '../models/event.models';
+import { AllEventsResponse, EventUpdateBody } from '../models/event.models';
 import { EventService } from '../services/event.service';
+import { AuthService } from '../../../services/auth.service';
+import { ToastService } from '../../../services/toast.service';
 @Component({
   selector: 'app-event-volunteer',
   templateUrl: './event-volunteer.component.html',
@@ -381,7 +383,7 @@ export class EventVolunteerComponent implements OnInit {
 
   sortField: string = '';
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private authService: AuthService, private toastService : ToastService) { }
 
   ngOnInit(): void {
     this.eventService.getAllEvents().subscribe({
@@ -411,6 +413,32 @@ export class EventVolunteerComponent implements OnInit {
 
   onFilter(dv: DataView, event: Event) {
     dv.filter((event.target as HTMLInputElement).value);
+  }
+
+  onVolunteerForEvent(event: AllEventsResponse) {
+    console.log("Event", event);
+
+    const volunteer: EventUpdateBody = {
+      eventId: event.eventId,
+      employeeMail: this.authService.currentUser?.email as string,
+      category: "Volunteer",
+      type: "Event with feedback",
+      feedback: "",
+      isAttending: true,
+      isPresent: false,
+      rating: ""
+    }
+
+    this.eventService.upDateEvent(volunteer).subscribe({
+      next: (response) => {
+
+        this.toastService.showSuccessToast("You have successfully volunteered for the event", "");
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+
   }
 
 

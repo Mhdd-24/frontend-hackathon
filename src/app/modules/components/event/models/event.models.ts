@@ -102,3 +102,14 @@ export interface AllEventsResponse {
     votable: boolean;
 }
 
+export interface EventUpdateBody {
+    eventId: string;
+    employeeMail: string;
+    category: string;
+    type: string;
+    feedback: string;
+    isAttending: boolean;
+    isPresent: boolean;
+    rating: string;
+}
+

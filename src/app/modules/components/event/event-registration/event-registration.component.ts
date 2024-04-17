@@ -92,7 +92,7 @@ export class EventRegistrationComponent {
       ]),
     })
 
-    console.log(this.id);
+
     this.eventService.getEventById(this.id!).subscribe({
       next: (event) => {
         this.isEditMode = true;
