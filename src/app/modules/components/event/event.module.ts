@@ -7,6 +7,7 @@ import { NgprimeModule } from '../../shared/ngprime/ngprime.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SuggestEventComponent } from './suggest-event/suggest-event.component';
 import { InvitationEventComponent } from './invitation-event/invitation-event.component';
+import { EventAttendanceComponent } from './event-attendance/event-attendance.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { InvitationEventComponent } from './invitation-event/invitation-event.co
 
     EventVolunteerComponent,
     SuggestEventComponent,
-    InvitationEventComponent
+    InvitationEventComponent,
+    EventAttendanceComponent
   ],
   imports: [
     CommonModule,

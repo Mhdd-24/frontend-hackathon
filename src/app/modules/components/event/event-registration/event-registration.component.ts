@@ -30,6 +30,7 @@ export class EventRegistrationComponent {
   isIECFound: boolean = false;
   isEditMode = false;
   volunteers: AttendeesDto[] = [];
+  attendees: AttendeesDto[] = [];
 
   departments: Department[] = [
     { value: 'HR', viewValue: 'HR' },
@@ -135,6 +136,7 @@ export class EventRegistrationComponent {
         }
 
         this.volunteers = event.volunteer;
+        this.attendees = event.attendees;
 
         console.log(this.volunteers);
 

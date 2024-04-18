@@ -76,5 +76,10 @@ export class EventDetailsComponent implements OnInit {
     });
   }
 
+  onAddAttenadceClick(id: string) {
+    console.log(id);
+    this.router.navigate(['event/eventAttendance', id]);
+  }
+
 
 }
