@@ -31,7 +31,6 @@ import { AuthService } from './modules/services/auth.service';
     provideHttpClient(withFetch()),
     ConfigurationService,
     OidcHelperService,
-    LocalStoreManager,
     MessageService,
     AuthService
   ],

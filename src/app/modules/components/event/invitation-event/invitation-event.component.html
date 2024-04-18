@@ -33,7 +33,7 @@
 								<div class="mb-3">{{product.eventDescription}}</div>
                                 <div class="mb-2">Start Date Time : {{product.eventFromDate | date:'MM/dd/yyyy, h:mm a' }}</div>
 								<div class="mb-2">End Date Time: {{product.eventToDate | date:'MM/dd/yyyy, h:mm a' }}</div>
-								<p-button>Accept Invite</p-button>
+								<p-button (onClick)="acceptInvite(product)">Accept Invite</p-button>
 							
 							</div>
 						</div>
