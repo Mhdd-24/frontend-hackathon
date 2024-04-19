@@ -9,7 +9,9 @@ import { Observable, Subject } from 'rxjs';
 
 import { Utilities } from './utilities';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 /**
  * Provides a wrapper for accessing the web storage API and synchronizing session storage across tabs/windows.
  */
@@ -332,7 +334,10 @@ export class LocalStoreManager {
   }
 
   private sessionStorageGetItem(key: string) {
-    const item = sessionStorage.getItem(key);
+    if (typeof sessionStorage === 'undefined') {
+      return null;
+  }
+    const item = sessionStorage?.getItem(key);
 
     if (item === null)
       return null;

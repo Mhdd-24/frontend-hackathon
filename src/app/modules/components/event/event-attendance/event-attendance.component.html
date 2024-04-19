@@ -1,0 +1,25 @@
+<div class="card">
+    @if (!alreadyGaveFeedback) {
+    <div class="grid">
+        <div class="col-12">
+            <textarea rows="5" id="feedback" pInputTextarea class="w-full" placeholder="Enter You FeedBack Here"
+                [(ngModel)]="feedBack"></textarea>
+        </div>
+        <div class="col-12 text-center">
+            <p-rating styleClass="font-bold" [cancel]="false" [(ngModel)]="rating"></p-rating>
+        </div>
+        <div class="col-12 text-center">
+            <button type="button" pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-primary"
+                label="submit" (click)="onSendFeedback()"></button>
+        </div>
+    </div>
+    }
+    @else {
+    <div class="grid">
+        <div class="col-12 text-center">
+            <p-tag [value]="'You have already given feedback for this event'" severity="info"></p-tag>
+        </div>
+    </div>
+    }
+
+</div>

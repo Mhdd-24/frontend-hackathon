@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { SelectItem } from 'primeng/api';
-import { AllEventsResponse } from '../models/event.models';
+import { AllEventsResponse, EventUpdateBody } from '../models/event.models';
 import { Product } from '../models/eventVolunteer.model';
 import { EventService } from '../services/event.service';
+import { AuthService } from '../../../services/auth.service';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-invitation-event',
@@ -382,7 +384,7 @@ export class InvitationEventComponent {
 
   sortField: string = '';
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private authService : AuthService, private toastService : ToastService) { }
 
   ngOnInit(): void {
     this.eventService.getAllEvents().subscribe({
@@ -408,6 +410,32 @@ export class InvitationEventComponent {
       this.sortOrder = 1;
       this.sortField = value;
     }
+  }
+
+  acceptInvite(event : AllEventsResponse){
+    const body: EventUpdateBody ={
+      eventId: event.eventId,
+      employeeMail: this.authService.currentUser?.email as string,
+      category: "Invitation",
+      type: "Event with feedback",
+      feedback: "",
+      isAttending: true,
+      isPresent: false,
+      rating: ""
+
+    }
+    this.eventService.upDateEvent(body).subscribe({
+      next: (events) => {
+        console.log(events);
+        //Filter Events only those need volunteers
+        this.toastService.showSuccessToast("Invitation Accepted","Success");
+
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+
   }
 
 }

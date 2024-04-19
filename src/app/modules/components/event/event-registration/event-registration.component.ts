@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray } from '@angular/forms';
-import { EventRequest, Expenses } from '../models/event.models';
+import { AttendeesDto, EventRequest, Expenses } from '../models/event.models';
 import { EventService } from '../services/event.service';
 import { ToastService } from '../../../services/toast.service';
+import { Table } from 'primeng/table';
 
 
 interface Department {
@@ -28,6 +29,12 @@ export class EventRegistrationComponent {
   eventRegisterForm !: FormGroup;
   isIECFound: boolean = false;
   isEditMode = false;
+  volunteers: AttendeesDto[] = [];
+  attendees: AttendeesDto[] = [];
+  totalAttandance: number = 0;
+  totalAttanees = 0;
+  averageRating = 0;
+  pendingBudget = 0;
 
   departments: Department[] = [
     { value: 'HR', viewValue: 'HR' },
@@ -106,7 +113,7 @@ export class EventRegistrationComponent {
           isVotable: this.isVotable.find(votable => votable.value === event.votable),
           isSnacks: this.isSnacks.find(snacks => snacks.value === event.snacks),
           needVolunteer: this.needVolunteer.find(volunteer => volunteer.value === event.needVolunteer),
-          expenses : null
+          expenses: null
         });
 
         if (event.checkLists.length > 1) {
@@ -120,7 +127,7 @@ export class EventRegistrationComponent {
           }
         }
 
-        if(event.expenses) {
+        if (event.expenses) {
           this.removeExpense(0);
           Object.keys(event.expenses).forEach((key) => {
             this.expenses.push(
@@ -131,6 +138,17 @@ export class EventRegistrationComponent {
             )
           })
         }
+
+        this.volunteers = event.volunteer;
+        this.attendees = event.attendees;
+
+        this.totalAttandance = event.attendance.length;
+        this.totalAttanees = event.attendees.length;
+        this.averageRating = event.attendance.reduce((acc, attendee) => acc + parseInt(attendee.rating), 0) / event.attendance.length;
+        console.log(this.averageRating);
+        this.pendingBudget = event.budget - event.remainingBudget;
+
+        console.log(this.volunteers);
 
 
       },
@@ -186,7 +204,7 @@ export class EventRegistrationComponent {
   load() {
     this.loading = true;
     console.log("Form Values", this.eventRegisterForm.value);
-    let expensesObj : any = {}
+    let expensesObj: any = {}
     this.eventRegisterForm.value.expenses.forEach((expense: any) => {
       expensesObj[expense.expense] = expense.amount;
     })
@@ -225,7 +243,7 @@ export class EventRegistrationComponent {
       eventQRCode: "",
       checkLists: this.eventRegisterForm.value.checkLists,
       isInternalEvent: true,
-      expenses : expensesObj
+      expenses: expensesObj
 
     }
 
@@ -264,6 +282,18 @@ export class EventRegistrationComponent {
 
   searchIEC() {
     this.isIECFound = true;
+  }
+
+  clear(table: Table) {
+    table.clear();
+  }
+
+  @ViewChild('dt') dt: Table | undefined;
+
+  applyFilterGlobal($event: any, stringVal: any) {
+    console.log($event);
+    console.log(stringVal);
+    this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
 }

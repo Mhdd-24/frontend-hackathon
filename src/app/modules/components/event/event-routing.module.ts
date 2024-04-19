@@ -4,6 +4,7 @@ import { EventRegistrationComponent } from './event-registration/event-registrat
 import { EventVolunteerComponent } from './event-volunteer/event-volunteer.component';
 import { SuggestEventComponent } from './suggest-event/suggest-event.component';
 import { InvitationEventComponent } from './invitation-event/invitation-event.component';
+import { EventAttendanceComponent } from './event-attendance/event-attendance.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'eventDetails', loadChildren: () => import('./event-details/event-details.module').then(m => m.EventDetailsModule) },
   { path: 'volunteerEvent', component: EventVolunteerComponent },
   { path: 'eventSuggestion', component: SuggestEventComponent },
-  { path: "inviationEvent", component: InvitationEventComponent }
+  { path: "inviationEvent", component: InvitationEventComponent },
+  { path: "eventAttendance/:eventId", component: EventAttendanceComponent }
 ];
 
 @NgModule({
