@@ -8,10 +8,10 @@ const routes: Routes = [
     path: '', component: AppLayoutComponent, children: [
       { path: 'event', loadChildren: () => import('./modules/components/event/event.module').then(m => m.EventModule) },
       { path: 'dashboard', loadChildren: () => import('./modules/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'food', loadChildren: () => import('./modules/components/food-count/food-count.module').then(m => m.FoodCountModule) },
       { path: 'leaveRoster', loadChildren: () => import('./modules/components/leave-roster/leave-roster.module').then(m => m.LeaveRosterModule) },
-
     ],
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   },
 
   { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) },

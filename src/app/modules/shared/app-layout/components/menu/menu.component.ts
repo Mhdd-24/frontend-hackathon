@@ -60,10 +60,10 @@ export class MenuComponent implements OnInit {
         label: 'Food Order',
         items: [
           {
-            label: 'Menu', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/food/manageFood'],
+            label: 'Menu', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/food/food-count'],
           },
           {
-            label: 'Order Food', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/food/orderFood'],
+            label: 'Order Food', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/food/foodDetails'],
           },
         ]
 
