@@ -4,6 +4,7 @@ import { ToastService } from '../../../services/toast.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { LeaveService } from '../services/leave.service';
 import { FileUploadHandlerEvent } from 'primeng/fileupload';
+import { Employee } from '../models/leaveRoster.model';
 
 interface UploadEvent {
   originalEvent: Event;
@@ -25,6 +26,9 @@ export class LeaveRosterComponent implements OnInit {
   leaveData : string[]= []
   showTable: boolean = false;
   todaysLeaveData: string[] = [];
+  leaveEmployees : Employee[] = [];
+  onSiteEmployees : Employee[] = [];
+  wfhEmployees : Employee[] = [];
   constructor(private leaveRosterService: LeaveService, private toasterService: ToastService, private fromBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -46,7 +50,9 @@ export class LeaveRosterComponent implements OnInit {
     this.leaveRosterService.getLeaveData(formData).subscribe({
       next: (response) => {
         console.log("Response", response);
-        this.todaysLeaveData = response.data as string[];
+        this.leaveEmployees = response?.data!.leaveEmployees as Employee[];
+        this.onSiteEmployees = response?.data!.onSiteEmployees as Employee[];
+        this.wfhEmployees = response?.data!.wfhEmployees as Employee[];
       },
       error: (error) => {
         console.log("Error", error);
@@ -74,7 +80,9 @@ export class LeaveRosterComponent implements OnInit {
     this.leaveRosterService.getLeaveData(formData).subscribe({
       next: (response) => {
         console.log("Response", response);
-        this.leaveData = response.data as string[];
+        this.leaveEmployees = response?.data!.leaveEmployees as Employee[];
+        this.onSiteEmployees = response?.data!.onSiteEmployees as Employee[];
+        this.wfhEmployees = response?.data!.wfhEmployees as Employee[];
         this.showTable = true;
       },
       error: (error) => {

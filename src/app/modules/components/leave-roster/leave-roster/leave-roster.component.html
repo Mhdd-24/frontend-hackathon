@@ -45,16 +45,16 @@
 
             <div class="col-12" *ngIf="showTable">
 
-                <p-table [value]="leaveData" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+                <p-table [value]="leaveEmployees" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>Name</th>
+                            <th>Employees on Leave</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-product>
                         <tr>
 
-                            <td>{{product}}</td>
+                            <td>{{product.name}}</td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
@@ -63,6 +63,45 @@
                         </tr>
                     </ng-template>
                 </p-table>
+
+                <p-table [value]="onSiteEmployees" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Employees On Site</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+
+                            <td>{{product.name}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="7">No Content found.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+                <p-table [value]="wfhEmployees" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Employees On WFH</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr>
+
+                            <td>{{product.name}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="7">No Content found.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
 
 
             </div>
