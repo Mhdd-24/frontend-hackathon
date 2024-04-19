@@ -31,6 +31,7 @@ export class EventRegistrationComponent {
   isEditMode = false;
   volunteers: AttendeesDto[] = [];
   attendees: AttendeesDto[] = [];
+  attandance: AttendeesDto[] = [];
   totalAttandance: number = 0;
   totalAttanees = 0;
   averageRating = 0;
@@ -141,7 +142,7 @@ export class EventRegistrationComponent {
 
         this.volunteers = event.volunteer;
         this.attendees = event.attendees;
-
+        this.attandance = event.attendance;
         this.totalAttandance = event.attendance.length;
         this.totalAttanees = event.attendees.length;
         this.averageRating = event.attendance.reduce((acc, attendee) => acc + parseInt(attendee.rating), 0) / event.attendance.length;

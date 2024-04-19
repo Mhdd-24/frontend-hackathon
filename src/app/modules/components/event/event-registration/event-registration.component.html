@@ -182,7 +182,7 @@
 </div>
 
 <div class="card flex justify-content-center">
-    <p-accordion [multiple]="true" [activeIndex]="[0]">
+    <p-accordion [multiple]="true" [activeIndex]="[2]">
         <p-accordionTab header="See Volunteers">
             <p-table #dt [value]="volunteers" [rows]="10" [paginator]="true"
                 [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
@@ -191,7 +191,7 @@
                 [showCurrentPageReport]="true">
                 <ng-template pTemplate="caption">
                     <div class="flex align-items-center justify-content-between">
-                        
+
                         <span class="p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
@@ -201,7 +201,8 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="name" style="min-width:15rem">Volunteer Name <p-sortIcon field="name"></p-sortIcon>
+                        <th pSortableColumn="name" style="min-width:15rem">Volunteer Name <p-sortIcon
+                                field="name"></p-sortIcon>
                         </th>
                         <th pSortableColumn="email">Volunteer Email <p-sortIcon field="email"></p-sortIcon></th>
                     </tr>
@@ -220,48 +221,59 @@
         </p-accordionTab>
         <p-accordionTab header="See Invitation Acceptace">
             <p-table #dt [value]="attendees" [rows]="10" [paginator]="true"
-            [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
-            [tableStyle]="{ 'min-width': '75rem' }" [rowHover]="true" dataKey="id"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true">
-            <ng-template pTemplate="caption">
-                <div class="flex align-items-center justify-content-between">
-                    
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
-                            placeholder="Search..." />
-                    </span>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th pSortableColumn="name" style="min-width:15rem">Attendees Name <p-sortIcon field="name"></p-sortIcon>
-                    </th>
-                    <th pSortableColumn="email">Attendees Email <p-sortIcon field="email"></p-sortIcon></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product>
-                <tr>
-                    <td>{{ product.employee.name }}</td>
-                    <td>{{ product.employee.email}}</td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="summary">
-                <div class="flex align-items-center justify-content-between">In total there are {{ volunteers ?
-                    volunteers.length : 0 }} products.</div>
-            </ng-template>
-        </p-table>
+                [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+                [tableStyle]="{ 'min-width': '75rem' }" [rowHover]="true" dataKey="id"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="flex align-items-center justify-content-between">
+
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+                                placeholder="Search..." />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="name" style="min-width:15rem">Attendees Name <p-sortIcon
+                                field="name"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="email">Attendees Email <p-sortIcon field="email"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td>{{ product.employee.name }}</td>
+                        <td>{{ product.employee.email}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="flex align-items-center justify-content-between">In total there are {{ volunteers ?
+                        volunteers.length : 0 }} products.</div>
+                </ng-template>
+            </p-table>
         </p-accordionTab>
-        <p-accordionTab header="Header III">
-            <p>
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-                provident, similique sunt in culpa
-                qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est
-                et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo
-                minus.
-            </p>
+        <p-accordionTab header="See Comments">
+            <div class="col-12">
+                <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                    @for (item of attandance; track $index) {
+                    <li class="flex align-items-center py-2 border-bottom-1 surface-border">
+                        <div
+                            class="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0">
+                            <i class="pi pi-pencil text-xl text-blue-500"></i>
+                        </div>
+                        <div class="text-900 line-height-3">{{item.employee.email}}
+                            <div class="text-700"> {{item.feedback}} <div class="text-blue-500"><p-rating
+                                        [ngModel]="+item.rating" [cancel]="false"></p-rating></div>
+                            </div>
+                        </div>
+                    </li>
+                    }
+
+                </ul>
+            </div>
         </p-accordionTab>
     </p-accordion>
 </div>
