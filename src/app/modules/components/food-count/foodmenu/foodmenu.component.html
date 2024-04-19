@@ -28,7 +28,7 @@
                                         class="w-9 shadow-2 my-3 mx-0" />
                                     <div class="font-bold text-2xl">{{food.name}}</div>
                                     <div class="mb-3">{{food.description}}</div>
-                                    <span class="font-semibold">${{food.price}}</span>
+                                    <span class="font-semibold">{{food.price | currency: "INR" : "symbol" : '1.0-0' }}</span>
                                 </div>
                                 <div class="flex flex-row justify-content-center align-items-center">
                                     <p-button pButton icon="pi pi-minus" (click)="deleteQuantity(food)"

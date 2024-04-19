@@ -11,8 +11,9 @@ import { Food, FoodSaveResponse, FoodDetailsResponse } from '../models/food-coun
 })
 export class FoodEndpointService extends EndpointBase {
 
-  get saveFoodURL() { return this.configuration.baseUrl + '/food'; }
+  get saveFoodURL() { return this.configuration.baseUrl + '/foodOrder/placeorder'; }
   get getFoodMenuURL() { return this.configuration.baseUrl + '/food-menu'; }
+
 
   constructor(private configuration: ConfigurationService, http: HttpClient, authService: AuthService) {
     super(http, authService);
