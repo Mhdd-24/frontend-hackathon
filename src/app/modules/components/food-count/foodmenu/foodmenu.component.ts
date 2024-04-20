@@ -1,9 +1,10 @@
+import { AuthService } from './../../../services/auth.service';
 import { Component } from '@angular/core';
 import { Food, SelectItem } from '../models/foodmenu.models';
 import { DataView } from 'primeng/dataview';
 import { ToastService } from '../../../services/toast.service';
-
-
+import { FoodService } from "../services/food-count.service";
+import { FoodCheckoutRequest } from '../models/fooddetails.models';
 
 @Component({
   selector: 'app-food-menu',
@@ -11,7 +12,6 @@ import { ToastService } from '../../../services/toast.service';
   styleUrls: ['./foodmenu.component.scss']
 })
 export class FoodMenuComponent {
-
   foods: Food[] = [
     {
       "id": "1000",
@@ -263,41 +263,71 @@ export class FoodMenuComponent {
     }
   ]
 
-
   sortOptions: SelectItem[] = [];
-
   sortOrder: number = 0;
-
   sortField: string = '';
+  disabledbutton: boolean = false;
 
-  constructor(private toastService: ToastService) {}
-
-  onSortChange(event: any) {
-    const value = event.value;
-
-    if (value.indexOf('!') === 0) {
-      this.sortOrder = -1;
-      this.sortField = value.substring(1, value.length);
-    } else {
-      this.sortOrder = 1;
-      this.sortField = value;
-    }
-  }
+  constructor(
+    private toastService: ToastService,
+    private foodService: FoodService,
+    private authService: AuthService
+  ) {}
 
   onFilter(dv: DataView, event: Event) {
     dv.filter((event.target as HTMLInputElement).value);
   }
+
   checkout(): void {
+    const currentTime = new Date();
+    const closingTime = new Date(currentTime);
+    closingTime.setHours(11, 0, 0, 0);
+  
+    if (currentTime > closingTime) {
+      this.disabledbutton = true;
+      this.toastService.showErrorToast('Error', 'Orders are closed for the day.');
+      return;
+    }
+  
     const itemsInCart = this.foods.filter(food => food.quantity && food.quantity > 0);
   
     if (itemsInCart.length > 0) {
-      this.foods.forEach(food => food.quantity = 0);
-      this.toastService.showSuccessToast('Success', 'Food order placed successfully!');
+      const foodItemWithQuantity: { [id: string]: number } = {};
+  
+      for (const food of itemsInCart) {
+        foodItemWithQuantity[food.name] = food.quantity || 0;
+      }
+      
+      const today = new Date();
+      const day = today.getDate().toString().padStart(2, '0');
+      const month = (today.getMonth() + 1).toString().padStart(2, '0'); 
+      const year = today.getFullYear();
+      const formattedDate = `${day}/${month}/${year}`;
+  
+      const foodCheckout: FoodCheckoutRequest = {
+        date: formattedDate,
+        user: this.authService.currentUser?.email as string ,
+        foodItemWithQuantity: foodItemWithQuantity
+      };
+  
+      this.foodService.checkoutFood(foodCheckout).subscribe({
+        next: (response: FoodCheckoutRequest) => {
+          console.log('Checkout Response:', response);
+          for (const food of itemsInCart) {
+            food.quantity = 0;
+          }
+          this.toastService.showSuccessToast('Success', 'Food order placed successfully!');
+        },
+        error: (error: any) => {
+          console.log('Error occurred during checkout:', error);
+          this.toastService.showErrorToast('Error', 'An error occurred during checkout.');
+        }
+      });
     } else {
       this.toastService.showErrorToast('Error', 'Please add items to the cart before checkout.');
     }
   }
-
+  
   addQuantity(food: Food): void {
     food.quantity = (food.quantity || 0) + 1;
   }

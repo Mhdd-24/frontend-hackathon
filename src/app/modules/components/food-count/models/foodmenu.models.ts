@@ -1,14 +1,11 @@
 export interface Food {
-  id?: string;
-  code?: string;
-  name?: string;
-  description?: string;
-  price?: number;
+  id: string;
+  code: string;
+  name: string;
+  description: string;
+  price: number;
   quantity?: number;
-  inventoryStatus?: string;
-  category?: string;
-  image?: string;
-  rating?: number;
+  image: string;
 }
 
 export interface SelectItem<T = any> {

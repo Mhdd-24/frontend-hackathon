@@ -1,50 +1,61 @@
 <div class="food-menu">
-  <h2>Food Menu</h2>
-  <p-table
-    [globalFilterFields]="['foodName', 'category', 'price', 'description']"
-    #dt [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [loading]="loading" [paginator]="true" [value]="foods"
-    dataKey="foodName" [tableStyle]="{ 'min-width': '100rem' }" [rowHover]="true" [scrollable]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-    <ng-template pTemplate="caption">
-      <div class="flex align-items-center justify-content-between">
-        <h5 class="m-0">Total Items:
-          <p-tag [value]=" foods ? foods.length.toString(): '0' " styleClass="text-2xl"></p-tag>
-        </h5>
-        <span class="p-input-icon-left">
-          <i class="pi pi-search"></i>
-          <input pInputText type="text" #textInput (input)="dt.filterGlobal(textInput.value.toLowerCase(), 'contains')"
-            placeholder="Search..." />
-        </span>
-      </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-      <tr>
-        <th style="width: 5rem"></th>
-        <th pSortableColumn="UserName">UserName <p-sortIcon field="UserName"></p-sortIcon></th>
-        <th pSortableColumn="foodName">Food Name <p-sortIcon field="foodName"></p-sortIcon></th>
-        <th pSortableColumn="Quantity">Quantity <p-sortIcon field="Quantity"></p-sortIcon></th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-food let-expanded="expanded">
-      <tr>
-        <td>
-          <button type="button" pButton pRipple [pRowToggler]="food"
-            class="p-button-text p-button-rounded p-button-plain"
-            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-        </td>
-        <td>{{ food.userName }}</td>
-        <td>{{ food.foodName }}</td>
-        <td>{{ food.quantity }}</td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="rowexpansion" let-food>
-      <tr>
-        <td colspan="5">
-          <div class="p-3">
-            <p>{{ food.details }}</p>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+    <h2>Food Menu</h2>
+    <p-table #dt [value]="foods" [rows]="10" [paginator]="true" [globalFilterFields]="['user', 'foodItemWithQuantity']"
+        [tableStyle]="{ 'min-width': '75rem' }" dataKey="user" [rowHover]="true" [scrollable]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+                        placeholder="Search..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="user" style="min-width:15rem">User Name <p-sortIcon field="user"></p-sortIcon>
+                </th>
+                <th pSortableColumn="foodItemWithQuantity">Ordered Items</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+            <tr>
+                <td>{{ order.user }}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let item of order.foodItemWithQuantity | keyvalue">
+                            {{ item.key }} - {{ item.value }}
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <h2>Vendor Food Menu</h2>
+    <p-table #vendorDt [value]="foodVendorArray" [rows]="20" [rowHover]="true" [scrollable]="true"
+        [tableStyle]="{ 'min-width': '75rem' }" dataKey="itemName">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <span class="p-input-icon-right">
+                    <p-button pButton label="Download" icon="pi pi-download" class="p-button-rounded p-button-text"
+                        (click)="downloadData()"></p-button>
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="itemName">Item Name <p-sortIcon field="itemName"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantity">Quantity</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+            <tr>
+                <td>{{ order.itemName }}</td>
+                <td>{{ order.quantity }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FoodEndpointService } from '../services/food-count-endpoint.service';
+
+import { FoodCheckoutRequest, FoodOrderResponse, FoodCheckoutResponse, FoodVendorResponse } from '../models/fooddetails.models';
 import { Observable, map } from 'rxjs';
-import { Food, FoodSaveResponse, FoodDetailsResponse } from '../models/food-count.models';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,22 @@ export class FoodService {
 
   constructor(private foodEndPointService: FoodEndpointService) { }
 
-  saveFood(food: Food): Observable<FoodSaveResponse> {
-    return this.foodEndPointService.saveFood(food).pipe<FoodSaveResponse>(map(res => {
+  checkoutFood(foods: FoodCheckoutRequest): Observable<FoodCheckoutResponse> {
+    return this.foodEndPointService.checkoutFoodEndPoint(foods).pipe<FoodCheckoutResponse>(map((res : FoodCheckoutResponse)  => {
       return res;
     }))
   }
 
-  getFoodMenu(): Observable<FoodDetailsResponse> {
-    return this.foodEndPointService.getFoodMenu().pipe<FoodDetailsResponse>(map(res => {
+  getFoodOrderList(formData: FormData) : Observable<FoodOrderResponse>{
+    return this.foodEndPointService.getFoodOrderListEndPoint(formData).pipe<FoodOrderResponse>(map((res : FoodOrderResponse) => {
+      console.log(res);
+      return res;
+    }))
+  }
+
+  getFoodVendorList(formData: FormData): Observable<FoodVendorResponse>{
+    return this.foodEndPointService.getFoodVEndorListEndPoint(formData).pipe<FoodVendorResponse>(map((res : FoodVendorResponse) => {
+      console.log(res);
       return res;
     }))
   }
