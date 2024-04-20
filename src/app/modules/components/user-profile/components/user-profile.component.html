@@ -1,1 +1,30 @@
-<p>user-profile works!</p>
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div class="p-field">
+        <label for="empid">Employee ID</label>
+        <input id="empid" type="text" formControlName="empid" pInputText />
+    </div>
+    <div class="p-field">
+        <label for="name">Name</label>
+        <input id="name" type="text" formControlName="name" pInputText />
+    </div>
+    <!-- Add other form fields similarly -->
+
+    <!-- Skill and Rating Fields -->
+    <div formArrayName="skills">
+        <div *ngFor="let branch of skills.controls; index as i" [formGroupName]="i">
+            <div class="p-field">
+                <label for="skill">Skill</label>
+                <input id="skill" type="text" formControlName="skill" pInputText />
+            </div>
+            <div class="p-field">
+                <label for="rating">Rating</label>
+                <input id="rating" type="number" formControlName="rating" pInputNumber />
+            </div>
+            <button type="button" pButton icon="pi pi-trash" (click)="removeSkill(i)" class="p-button-danger"
+                label="Delete"></button>
+        </div>
+    </div>
+    <button type="button" pButton icon="pi pi-plus" (click)="addSkill()" label="Add Skill"></button>
+
+    <button type="submit" pButton label="Submit"></button>
+</form>

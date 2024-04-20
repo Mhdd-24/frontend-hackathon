@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { UserProfileComponent } from './components/user-profile.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgprimeModule } from '../../shared/ngprime/ngprime.module';
 
 
 @NgModule({
@@ -13,7 +15,10 @@ import { UserManagementComponent } from './components/user-management/user-manag
   ],
   imports: [
     CommonModule,
-    UserProfileRoutingModule
+    UserProfileRoutingModule,
+    ReactiveFormsModule,
+    NgprimeModule,
+    FormsModule
   ]
 })
 export class UserProfileModule { }

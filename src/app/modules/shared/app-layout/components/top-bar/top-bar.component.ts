@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from '../../services/layout.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,6 +18,12 @@ export class TopBarComponent {
 
   @ViewChild('topbarmenu') menu!: ElementRef;
 
-  constructor(public layoutService: LayoutService) { }
+  constructor(public layoutService: LayoutService, private router:Router) { }
+
+
+  onbtnClick(){
+    this.router.navigate(['/userProfile']);
+
+  }
 
 }
