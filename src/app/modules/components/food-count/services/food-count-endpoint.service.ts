@@ -3,35 +3,38 @@ import { ConfigurationService } from '../../../services/configuration.service';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
 import { EndpointBase } from '../../../services/endpoint-base.service';
+
+import {  FoodCheckoutRequest, FoodOrderResponse, FoodCheckoutResponse, FoodVendorResponse } from '../models/fooddetails.models';
 import { Observable, catchError } from 'rxjs';
-import { Food, FoodSaveResponse, FoodDetailsResponse } from '../models/food-count.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodEndpointService extends EndpointBase {
 
-  get saveFoodURL() { return this.configuration.baseUrl + '/foodOrder/placeorder'; }
-  get getFoodMenuURL() { return this.configuration.baseUrl + '/food-menu'; }
-
+  checkoutURL() { return this.configuration.baseUrl + '/foodOrder/placeorder'; }
+  foodOrderURL() { return this.configuration.baseUrl + '/foodOrder/getDayOrder'; }
+  FoodVendorURL() { return this.configuration.baseUrl + '/foodOrder/vendorOrderDetails'; }
 
   constructor(private configuration: ConfigurationService, http: HttpClient, authService: AuthService) {
     super(http, authService);
   }
 
-  saveFood(food: Food): Observable<FoodSaveResponse> {
-    return this.http.post<FoodSaveResponse>(this.saveFoodURL, JSON.stringify(food), this.requestHeaders).pipe(
+  checkoutFoodEndPoint(food: FoodCheckoutRequest): Observable<FoodCheckoutResponse> {
+    const body = JSON.stringify(food);
+    return this.http.post<FoodCheckoutResponse>(this.checkoutURL(), body, this.requestHeaders).pipe(
       catchError(error => {
-        return this.handleError(error, () => this.saveFood(food));
+        return this.handleError(error, () => this.checkoutFoodEndPoint(food));
       })
     );
   }
 
-  getFoodMenu(): Observable<FoodDetailsResponse> {
-    return this.http.get<FoodDetailsResponse>(this.getFoodMenuURL, this.requestHeaders).pipe(
-      catchError(error => {
-        return this.handleError(error, () => this.getFoodMenu());
-      })
-    );
+  getFoodOrderListEndPoint(formData: FormData): Observable<FoodOrderResponse> {
+    return this.http.post<FoodOrderResponse>(this.foodOrderURL(), formData);
   }
+
+  getFoodVEndorListEndPoint(formData: FormData): Observable<FoodVendorResponse>{
+    return this.http.post<FoodVendorResponse>(this.FoodVendorURL(), formData);
+  }
+
 }
