@@ -113,6 +113,14 @@ export class AuthService {
     return this.oidcHelperService.loginWithPassword(userName, password).pipe(map(response => this.processUserLogin(response, rememberMe)));
   }
 
+  signupWithPassword(username: string, email: string, rememberMe?: boolean) {
+    if (this.isLoggedIn) {
+      this.logout();
+    }
+
+    return this.oidcHelperService.signupWithPassword(username, email).pipe(map(response => this.processUserLogin(response, rememberMe)));
+  }
+
   processUserLogin(response: UserLoginResponse, rememberMe?: boolean) {
     rememberMe = rememberMe ?? this.rememberMe;
 

@@ -22,6 +22,7 @@ export class OidcHelperService {
   private readonly tokenEndpoint = '/connect/token';
 
   get loginUrl() { return this.configurationService.baseUrl + '/event/login'; }
+  get signUpUrl() { return this.configurationService.baseUrl + '/event/signup'; }
 
   protected get requestHeaders(): { headers: HttpHeaders | { [header: string]: string | string[]; } } {
     const headers = new HttpHeaders({
@@ -41,6 +42,11 @@ export class OidcHelperService {
   loginWithPassword(userName: string, password: string): Observable<UserLoginResponse> {
     const body = { email: userName, password: password, username: 'null' }
     return this.http.post<UserLoginResponse>(this.loginUrl, JSON.stringify(body), this.requestHeaders);
+  }
+
+  signupWithPassword(userName: string, password: string): Observable<UserLoginResponse> {
+    const body = { email: userName, password: password, username: 'null' }
+    return this.http.post<UserLoginResponse>(this.signUpUrl, JSON.stringify(body), this.requestHeaders);
   }
 
   refreshLogin() {

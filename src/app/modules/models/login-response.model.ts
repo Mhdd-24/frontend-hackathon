@@ -32,3 +32,43 @@ export interface IdToken {
   jobtitle: string;
   configuration: string;
 }
+
+interface Employee {
+  empid: string;
+  name: string;
+  email: string;
+  department: string;
+  designation: string;
+  dob: string;
+  doj: string;
+  address: string;
+  mobileno: string;
+  userId: string;
+  employeeExperience: EmployeeExperience[];
+  skillVsRating: { [key: string]: number };
+}
+
+interface EmployeeExperience {
+  companyName: string;
+  domain: string;
+  yearsOfExp: number;
+}
+export interface SaveEmployeeResponse {
+  message: string;
+  status: string;
+  employee: EmployeeData;
+}
+
+interface EmployeeData {
+  id: string;
+  empid: string;
+  name: string;
+  email: string;
+  department: string;
+  designation: string;
+  dob: string;
+  doj: string;
+  address: string;
+  mobileno: string;
+  userId: string;
+}
