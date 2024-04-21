@@ -1,0 +1,48 @@
+<div class="card">
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-12 md:col-3">
+                <label htmlFor="empid">Employee ID</label>
+                <input pInputText id="empid" type="text" formControlName="empid" />
+            </div>
+            <div class="field col-12 md:col-3">
+                <label htmlFor="name">Name</label>
+                <input pInputText id="name" type="text" formControlName="name" />
+            </div>
+            <div class="field col-12 md:col-3">
+                <label htmlFor="email">Email</label>
+                <input pInputText id="email" type="text" formControlName="email" />
+            </div>
+            <div class="field col-12 md:col-3">
+                <label htmlFor="department">Department</label>
+                <p-dropdown formControlName="department" [options]="departments" optionLabel="viewValue"
+                    id="department"></p-dropdown>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label htmlFor="dob">Date of Birth</label>
+                <p-calendar formControlName="dob" [showIcon]="true"></p-calendar>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label htmlFor="doj">Date of Joining</label>
+                <p-calendar formControlName="doj" [showIcon]="true"></p-calendar>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label htmlFor="adid">Adid</label>
+                <input pInputText id="adid" type="text" formControlName="userId" />
+            </div>
+            <div class="field col-12 md:col-3">
+                <label htmlFor="mobileno">Mobile Number</label>
+                <p-inputNumber formControlName="mobileno" id="mobileno" [useGrouping]="false"></p-inputNumber>
+            </div>
+            <div class="field col-12">
+                <label htmlFor="address">Address</label>
+                <textarea formControlName="address" pInputTextarea id="address"></textarea>
+            </div>
+        </div>
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-12">
+                <button pButton type="submit" label="Submit" [disabled]="!employeeForm.valid"></button>
+            </div>
+        </div>
+    </form>
+</div>

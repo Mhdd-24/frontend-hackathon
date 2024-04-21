@@ -16,6 +16,7 @@ export interface Expenses {
 }
 
 export interface EventRequest {
+    eventId?: string | null;
     eventName: string;
     eventDescription: string;
     eventFromDate: string;
