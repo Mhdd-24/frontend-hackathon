@@ -36,6 +36,7 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 
 import { AccordionModule } from 'primeng/accordion';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 
 @NgModule({
   declarations: [],
@@ -73,7 +74,8 @@ import { AccordionModule } from 'primeng/accordion';
     PasswordModule,
     MessagesModule,
     MessageModule,
-    AccordionModule
+    AccordionModule,
+    TieredMenuModule
   ]
 })
 export class NgprimeModule { }

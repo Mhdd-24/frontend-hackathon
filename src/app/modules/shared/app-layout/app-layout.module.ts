@@ -1,3 +1,4 @@
+import { NgprimeModule } from './../ngprime/ngprime.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +12,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { AppConfigModule } from './components/config/config.module';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 
 
 
@@ -30,7 +32,9 @@ import { AppConfigModule } from './components/config/config.module';
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule,
-    AppConfigModule
+    AppConfigModule,
+    NgprimeModule,
+    TieredMenuModule
   ],
   exports: [AppLayoutComponent]
 })
