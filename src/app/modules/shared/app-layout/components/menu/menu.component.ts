@@ -68,14 +68,12 @@ export class MenuComponent implements OnInit {
         ]
 
       },
-      //{ label: 'Menu', icon: 'pi pi-fw pi-bars', routerLink: ['/master/unitMaster'], routerLinkActiveOptions: { paths: 'subset', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' } },
-      // {
-      //   label: 'Prime Blocks',
-      //   items: [
-      //     { label: 'Free Blocks', icon: 'pi pi-fw pi-eye', routerLink: ['/blocks'], badge: 'NEW' },
-      //     { label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: ['https://www.primefaces.org/primeblocks-ng'], target: '_blank' },
-      //   ]
-      // },
+      {
+        label: 'Employee Details',
+        items: [
+          { label: 'EmployeeDetails', icon: 'pi pi-fw pi-table', routerLink: ['/userProfile/employeeDetails'] },
+        ]
+      }
       // {
       //   label: 'Utilities',
       //   items: [

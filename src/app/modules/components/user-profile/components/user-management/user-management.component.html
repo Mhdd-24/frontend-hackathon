@@ -104,8 +104,8 @@
                 <td>{{ employee.email }}</td>
                 <td>{{ employee.department }}</td>
                 <td>{{ employee.designation }}</td>
-                <td>{{ employee.dob }}</td>
-                <td>{{ employee.doj }}</td>
+                <td>{{ employee.dob | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ employee.doj | date: 'dd/MM/yyyy' }}</td>
                 <td>{{ employee.address }}</td>
                 <td>{{ employee.mobileno }}</td>
                 <td>{{ employee.userId }}</td>
