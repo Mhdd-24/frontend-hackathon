@@ -1,4 +1,5 @@
-export interface EmployeeTableDetails {
+export interface EmployeeResponse {
+  id: string;
   empid: string;
   name: string;
   email: string;
@@ -9,12 +10,17 @@ export interface EmployeeTableDetails {
   address: string;
   mobileno: string;
   userId: string;
-  employeeExperience: {
-    companyName: string;
-    domain: string;
-    yearsOfExp: number;
-  }[];
-  skillVsRating: {
-    [skill: string]: number;
-  }[];
+  employeeExperience: EmployeeExperience[];
+  skillVsRating: SkillVsRating;
 }
+
+export interface EmployeeExperience {
+  companyName: string;
+  domain: string;
+  yearsOfExp: number;
+}
+
+export interface SkillVsRating {
+  [skill: string]: number;
+}
+

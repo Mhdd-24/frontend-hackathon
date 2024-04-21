@@ -1,8 +1,9 @@
 <div class="card">
-    <p-table #dt [value]="employees" dataKey="empid" [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
-        [paginator]="true" [rowHover]="true" [scrollable]="true" [tableStyle]="{ 'min-width': '75rem' }"
+    <p-table #dt [value]="allEmployeeDetails" dataKey="empid" [rows]="10" [showCurrentPageReport]="true"
+        [loading]="loading" [paginator]="true" [rowHover]="true" [scrollable]="true"
+        [tableStyle]="{ 'min-width': '75rem' }"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [globalFilterFields]="['empid', 'name', 'department', 'designation']">
+        [globalFilterFields]="['empid', 'name', 'department', 'designation', 'email', 'dob', 'doj', 'address', 'mobileno', 'userId', 'domain', 'companyNameyearsOfExp', 'getSkillgetSkillRating']">
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
                 <span class="p-input-icon-left">
@@ -108,14 +109,15 @@
                 <td>{{ employee.address }}</td>
                 <td>{{ employee.mobileno }}</td>
                 <td>{{ employee.userId }}</td>
-                <td>{{ employee.employeeExperience[0].domain }}</td>
-                <td >{{ employee.employeeExperience[0].companyName }} - {{ employee.employeeExperience[0].yearsOfExp }} years</td>
+                <td *ngIf='employee.employeeExperience != null'>{{ employee.employeeExperience[0].domain }}</td>
+                <td *ngIf='employee.employeeExperience != null'>{{ employee.employeeExperience[0].companyName }} -
+                    {{ employee.employeeExperience[0].yearsOfExp }} years</td>
                 <td>
-                    <ul>
+                    <ul *ngIf='employee.skillVsRating != null'>
                         <li class="flex justify-content-between  flex-direction-row"
-                            *ngFor="let skill of employee.skillVsRating">{{ getSkill(employee, skill) }} <span
+                            *ngFor="let item of employee.skillVsRating | keyvalue">{{ item.key }} <span
                                 class="inline-block ml-2">
-                                <p-rating [cancel]="false" [ngModel]="+getSkillRating(employee, skill)"></p-rating>
+                                <p-rating [cancel]="false" [ngModel]="item.value"></p-rating>
                             </span></li>
                     </ul>
                 </td>
