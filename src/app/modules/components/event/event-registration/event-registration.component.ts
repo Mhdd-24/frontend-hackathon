@@ -245,17 +245,54 @@ export class EventRegistrationComponent {
       checkLists: this.eventRegisterForm.value.checkLists,
       isInternalEvent: true,
       expenses: expensesObj
+    }
 
+    const eventUpdateFormData: EventRequest = {
+      eventId: this.id!,
+      eventName: this.eventRegisterForm.value.eventName,
+      eventDescription: this.eventRegisterForm.value.eventDescription,
+      eventFromDate: this.eventRegisterForm.value.eventFromDate,
+      eventToDate: this.eventRegisterForm.value.eventToDate,
+      eventLocation: this.eventRegisterForm.value.eventLocation,
+      organizer: {
+        empid: "",
+        name: this.eventRegisterForm.value.name,
+        email: '',
+      },
+      department: this.eventRegisterForm.value.department.value,
+      eventType: "Internal",
+      budget: this.eventRegisterForm.value.budget,
+      eventEndTime: "",
+      eventStartTime: "",
+      isInvitationRequired: false,
+      isSnacks: this.eventRegisterForm.value.isSnacks.value,
+      isVotable: this.eventRegisterForm.value.isVotable.value,
+      maxAttendees: 100,
+      needVolunteer: this.eventRegisterForm.value.needVolunteer.value,
+      remainingBudget: this.pendingBudget,
+      requiresRSVP: false,
+      status: "Active",
+      attendance: this.attandance,
+      attendees: this.attendees,
+      volunteer: this.volunteers,
+      eventAttendanceQRCode: "",
+      eventInvitationQRCode: "",
+      eventQRCode: "",
+      checkLists: this.eventRegisterForm.value.checkLists,
+      isInternalEvent: true,
+      expenses: expensesObj
     }
 
     console.log(this.eventRegisterForm.value, eventFormData);
 
-    this.eventService.saveEvent(eventFormData).subscribe({
+    this.eventService.saveEvent(this.id == null ? eventFormData : eventUpdateFormData).subscribe({
       next: (response) => {
         console.log("Response", response);
         this.loading = false;
-        this.resetForm();
-        this.toastService.showSuccessToast("Event Registered Successfully", "Event ID " + response.eventId);
+        if (!this.id) {
+          this.resetForm();
+        }
+        this.toastService.showSuccessToast("Event Saved Successfully", "Event ID " + response.eventId);
       },
       error: (error) => {
         console.log("Error", error);

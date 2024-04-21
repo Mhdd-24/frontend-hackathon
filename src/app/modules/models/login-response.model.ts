@@ -33,7 +33,7 @@ export interface IdToken {
   configuration: string;
 }
 
-interface Employee {
+export interface Employee {
   empid: string;
   name: string;
   email: string;
@@ -51,7 +51,7 @@ interface Employee {
 interface EmployeeExperience {
   companyName: string;
   domain: string;
-  yearsOfExp: number;
+  yearsOExp: number;
 }
 export interface SaveEmployeeResponse {
   message: string;
