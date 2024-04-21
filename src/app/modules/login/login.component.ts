@@ -3,6 +3,7 @@ import { LayoutService } from '../shared/app-layout/services/layout.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { ToastService } from '../services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   loginForm !: FormGroup;
 
-  constructor(public layoutService: LayoutService, private formBuilder: FormBuilder, private authService: AuthService, private messageService: ToastService) { }
+  constructor(public layoutService: LayoutService, private formBuilder: FormBuilder, private authService: AuthService, private messageService: ToastService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -45,6 +46,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.loginWithPassword(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value, this.loginForm.get('rememberMe')?.value).subscribe({
       next: (response) => {
+        console.log(response);
         if (response.status === "SUCCESS") {
           this.loading = false;
           this.resetForm();
@@ -64,6 +66,10 @@ export class LoginComponent implements OnInit {
         this.loading = false;
       }
     })
+  }
+
+  onSignUpClick(): void {
+    this.router.navigate(['/signUp']);
   }
 
 }

@@ -125,10 +125,11 @@ export class AuthService {
     rememberMe = rememberMe ?? this.rememberMe;
 
     const user = new User(response.username, response.email!, response.username, response.email!, response.mobileno!, response.status);
+    console.log("User", user);
     user.isEnabled = true;
     this.saveUserDetails(user, [], '', '', new Date(), rememberMe);
     this.reevaluateLoginStatus(user);
-    if(response.status === "SUCCESS") {
+    if (response.status === "SUCCESS") {
       this.redirectLoginUser();
     }
     return response;
@@ -170,6 +171,8 @@ export class AuthService {
       decodedIdToken.jobtitle,
       decodedIdToken.phone_number,
       Array.isArray(decodedIdToken.role) ? decodedIdToken.role : [decodedIdToken.role]);
+
+    console.log("User", user);
 
     user.isEnabled = true;
 

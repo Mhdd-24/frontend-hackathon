@@ -11,6 +11,12 @@ interface UploadEvent {
   files: File[];
 }
 
+
+interface Department {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-leave-roster',
   templateUrl: './leave-roster.component.html',
@@ -29,6 +35,20 @@ export class LeaveRosterComponent implements OnInit {
   leaveEmployees : Employee[] = [];
   onSiteEmployees : Employee[] = [];
   wfhEmployees : Employee[] = [];
+  selectedDept !:  Department;
+
+  departments: Department[] = [
+    { value: '', viewValue: 'All' },
+    { value: 'HR', viewValue: 'HR' },
+    { value: 'IT', viewValue: 'IT' },
+    { value: 'Finance', viewValue: 'Finance' },
+    { value: 'Web Portals', viewValue: 'Web Portals' },
+    { value: 'Mobility', viewValue: 'Mobility' },
+    { value: 'Data', viewValue: 'Data' },
+    { value: 'Martech', viewValue: 'Martech' },
+    { value: 'SFDC', viewValue: 'SFDC' }
+  ];
+
   constructor(private leaveRosterService: LeaveService, private toasterService: ToastService, private fromBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -43,9 +63,10 @@ export class LeaveRosterComponent implements OnInit {
     const day = this.todatDate?.getDate();
 
     const formData = new FormData();
-    formData.append('month', month!.toString()!.toLowerCase());
+    formData.append('month', month!.toString());
     formData.append('year', year!.toString());
     formData.append('day', day!.toString());
+    formData.append('department','');
 
     this.leaveRosterService.getLeaveData(formData).subscribe({
       next: (response) => {
@@ -73,9 +94,10 @@ export class LeaveRosterComponent implements OnInit {
     console.log("Year", year, "Month", month, "Day", day);
 
     const formData = new FormData();
-    formData.append('month', month!.toString()!.toLowerCase());
+    formData.append('month', month!.toString()!);
     formData.append('year', year!.toString());
     formData.append('day', day!.toString());
+    formData.append('department', this.selectedDept.value === "ALL" ? '' : this.selectedDept.value);
 
     this.leaveRosterService.getLeaveData(formData).subscribe({
       next: (response) => {

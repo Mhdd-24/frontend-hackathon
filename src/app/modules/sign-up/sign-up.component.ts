@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from
 import { AuthService } from '../services/auth.service';
 import { LayoutService } from '../services/layout.service';
 import { ToastService } from '../services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,7 @@ export class SignUpComponent {
   loading = false;
   loginForm !: FormGroup;
 
-  constructor(public layoutService: LayoutService, private formBuilder: FormBuilder, private authService: AuthService, private messageService: ToastService) { }
+  constructor(public layoutService: LayoutService, private formBuilder: FormBuilder, private authService: AuthService, private messageService: ToastService, private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -64,5 +65,9 @@ export class SignUpComponent {
         this.loading = false;
       }
     })
+  }
+
+  onLoginClick(): void {
+    this.router.navigate(['/login']);
   }
 }

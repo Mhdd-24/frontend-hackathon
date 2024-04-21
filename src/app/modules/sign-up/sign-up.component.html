@@ -42,18 +42,17 @@
                             <small *ngIf="checkError('passwordConfirm','maxlength')" id="password-help">Password should
                                 be
                                 maximum 20 characters</small>
-                            <small *ngIf="checkError('passwordConfirm','validateEqual')" id="password-help">Password should
+                            <small *ngIf="checkError('passwordConfirm','validateEqual')" id="password-help">Password
+                                should
                                 be Same</small>
                         </div>
 
                         <div class="flex align-items-center justify-content-between mb-5 gap-5">
-                            <div class="flex align-items-center">
-                                <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"
-                                    formControlName="rememberMe"></p-checkbox>
-                                <label for="rememberme1">Remember me</label>
-                            </div>
+                            <a class="font-medium no-underline ml-2 text-right cursor-pointer"
+                                style="color: var(--primary-color)" (click)="onLoginClick()">Have Log In?</a>
                         </div>
-                        <button pButton pRipple label="Sign Up" class="w-full p-3 text-xl" type="submit" [disabled]="this.loginForm.invalid"></button>
+                        <button pButton pRipple label="Sign Up" class="w-full p-3 text-xl" type="submit"
+                            [disabled]="this.loginForm.invalid"></button>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,11 @@ import { ConfirmationService } from 'primeng/api';
 import { ToastService } from '../../../services/toast.service';
 
 
+export interface QrInfoInterface {
+  eventName: string;
+  base64: string;
+}
+
 @Component({
   selector: 'app-event-details',
   templateUrl: './event-details.component.html',
@@ -14,9 +19,17 @@ import { ToastService } from '../../../services/toast.service';
   providers: [ConfirmationService]
 })
 export class EventDetailsComponent implements OnInit {
+  imageUrl: any; //rename imageFileBinary to imageUrl
+  imageInfo: QrInfoInterface = {
+    eventName: '',
+    base64: ''
+  };
 
   loading: boolean = true;
   events !: AllEventsResponse[];
+
+  visible: boolean = false;
+
 
   constructor(private eventService: EventService, private router: Router, private confirmationService: ConfirmationService, private toastService: ToastService) { }
 
@@ -34,6 +47,18 @@ export class EventDetailsComponent implements OnInit {
       }
     });
 
+  }
+
+  convertToImage(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const file = (target.files as FileList)[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageInfo.base64 = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   getSeverity(status: string) {
@@ -80,6 +105,17 @@ export class EventDetailsComponent implements OnInit {
     console.log(id);
     this.router.navigate(['event/eventAttendance', id]);
   }
+
+
+  showDialog(product: AllEventsResponse) {
+    this.imageInfo.eventName = product.eventName;
+    this.imageInfo.base64 = product.eventAttendanceQRCode;
+    let imageBinary = this.imageInfo.base64; //image binary data response from api
+    let imageBase64String = btoa(imageBinary);
+    this.imageUrl = 'data:image/jpeg;base64,' + imageBase64String;
+    this.visible = true;
+  }
+
 
 
 }

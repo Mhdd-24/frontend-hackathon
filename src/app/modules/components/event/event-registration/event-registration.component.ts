@@ -334,5 +334,8 @@ export class EventRegistrationComponent {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
+  
+
+
 }
 
