@@ -38,7 +38,8 @@ import { MessageModule } from 'primeng/message';
 import { AccordionModule } from 'primeng/accordion';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ChartModule } from 'primeng/chart';
-
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { GalleriaModule } from 'primeng/galleria';
 @NgModule({
   declarations: [],
   imports: [
@@ -77,7 +78,9 @@ import { ChartModule } from 'primeng/chart';
     MessageModule,
     AccordionModule,
     TieredMenuModule,
-    ChartModule
+    ChartModule,
+    ProgressSpinnerModule,
+    GalleriaModule
   ]
 })
 export class NgprimeModule { }

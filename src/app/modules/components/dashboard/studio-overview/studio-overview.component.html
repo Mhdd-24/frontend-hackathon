@@ -1,3 +1,4 @@
+@if(dashboardData){
 <div class="grid">
     <div class="col-12 lg:col-6 xl:col-3">
         <div class="card mb-0">
@@ -158,7 +159,8 @@
                 </li>
 
             </ul>
-            <span class="block text-600 font-medium mb-3" *ngIf="dashboardData.data.employeesDob.length > 0">Birthday Buddies</span>
+            <span class="block text-600 font-medium mb-3" *ngIf="dashboardData.data.employeesDob">Birthday
+                Buddies</span>
             <ul class="p-0 m-0 list-none">
                 @for (item of dashboardData.data.employeesDob; track $index) {
                 <li class="flex align-items-center py-2 border-bottom-1 surface-border">
@@ -166,7 +168,8 @@
                         class="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0">
                         <i class="pi pi-dollar text-xl text-blue-500"></i>
                     </div>
-                    <span class="text-900 line-height-3">{{item.name}} <span class="text-700"> is celeberating Birthday Today </span>
+                    <span class="text-900 line-height-3">{{item.name}} <span class="text-700"> is celeberating Birthday
+                            Today </span>
                     </span>
                 </li>
                 }
@@ -184,3 +187,10 @@
     </div>
 
 </div>
+}
+
+@else {
+<div class="card flex justify-content-center">
+    <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+</div>
+}

@@ -152,7 +152,7 @@
                             class="fadeinleft fadeout  animation-duration-500 animation-ease-in-out p-inputgroup p-fluid col-11">
                             <span [formGroupName]="i" class="p-input-icon-left">
                                 <i class="font-bold">{{i+1}}</i>
-                                <input formControlName="expense" type="text" pInputText placeholder="Enter Exnpense" />
+                                <input formControlName="expense" type="text" pInputText placeholder="Enter Expense" />
                             </span>
                             <span [formGroupName]="i">
                                 <input type="number" formControlName="amount" pInputText placeholder="Enter Amount" />
@@ -175,12 +175,11 @@
         <!-- Action buttons for Save, Delete, and Reset -->
         <div class="card flex justify-content-center column-gap-3">
             <p-button label="Save" type="submit" [loading]="loading"></p-button>
-            <button pButton type="button" label="Delete" [loading]="loading" (click)="load()"></button>
-            <button pButton type="button" label="Reset" [loading]="loading" (click)="resetForm()"></button>
+            <button pButton type="button" label="Reset" (click)="resetForm()"></button>
         </div>
     </form>
 </div>
-
+@if(isEditMode){
 <div class="card col-12 ">
     <p-accordion [multiple]="true" [activeIndex]="[2]">
         <p-accordionTab header="See Volunteers">
@@ -215,7 +214,7 @@
                 </ng-template>
                 <ng-template pTemplate="summary">
                     <div class="flex align-items-center justify-content-between">In total there are {{ volunteers ?
-                        volunteers.length : 0 }} products.</div>
+                        volunteers.length : 0 }} volunteers.</div>
                 </ng-template>
             </p-table>
         </p-accordionTab>
@@ -251,7 +250,7 @@
                 </ng-template>
                 <ng-template pTemplate="summary">
                     <div class="flex align-items-center justify-content-between">In total there are {{ volunteers ?
-                        volunteers.length : 0 }} products.</div>
+                        volunteers.length : 0 }} volunteers.</div>
                 </ng-template>
             </p-table>
         </p-accordionTab>
@@ -277,3 +276,20 @@
         </p-accordionTab>
     </p-accordion>
 </div>
+
+<div class="card">
+    <div *ngIf="images" class="grid" style="max-width: 800px;">
+        <div *ngFor="let image of images; let index = index" class="col-3" key="index">
+            <img [src]="image.thumbnailImageSrc" [alt]="image.alt" style="cursor: pointer"
+                (click)="imageClick(index)" />
+        </div>
+    </div>
+    <p-galleria [value]="images" [visible]="displayCustom!" [(activeIndex)]="activeIndex"
+        [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '850px' }" [numVisible]="7"
+        [circular]="true" [fullScreen]="true" [showItemNavigators]="true" [showThumbnails]="false">
+        <ng-template pTemplate="item" let-item>
+            <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
+        </ng-template>
+    </p-galleria>
+</div>
+}
