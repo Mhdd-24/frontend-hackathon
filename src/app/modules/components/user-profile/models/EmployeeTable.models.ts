@@ -24,3 +24,14 @@ export interface SkillVsRating {
   [skill: string]: number;
 }
 
+export interface Product {
+  id?: string;
+  complaintId?: string;
+  userId?: string;
+  userEmail?: string;
+  complaintTitle?: string;
+  complaintDescription?: string;
+  category?: string;
+  status?: string;
+}
+

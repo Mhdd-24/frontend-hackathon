@@ -6,6 +6,7 @@ import { Employee } from '../../leave-roster/models/leaveRoster.model';
 import { SaveEmployeeResponse } from '../../../models/login-response.model';
 import { EmployeeResponse } from '../models/EmployeeTable.models';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,11 +22,15 @@ export class UserProfileService {
     }));
   }
 
+
+  
   getEmployeeDetailsList(): Observable<EmployeeResponse[]>{
     return this.userProfileEndPointService.getEmployeeDetailsEndPoint().pipe<EmployeeResponse[]>(map((res : EmployeeResponse[]) => {
       console.log(res);
       return res;
     }))
   }
+
+  
 
 }

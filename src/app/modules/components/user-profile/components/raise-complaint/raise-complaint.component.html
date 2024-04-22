@@ -1,0 +1,154 @@
+
+<div class="card">
+    <p-toast></p-toast>
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+            <button pButton pRipple [label]="'Delete'" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt
+        [value]="products"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['Employee Id', 'Employee category', 'UserID', 'UserEmail', 'complaintID', 'complaintTitle', 'complaintDescription', 'status' ]"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [(selection)]="selectedProducts"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Raise Complaint List</h5>
+               
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="name" style="min-width:10rem">Employee Id<p-sortIcon field="Employee Id"></p-sortIcon></th>
+                <th pSortableColumn="category" style="min-width:15rem">Employee Category<p-sortIcon field="Employee category"></p-sortIcon></th>
+                <th pSortableColumn="userID" style="min-width:8rem">UserID<p-sortIcon field="UserID"></p-sortIcon></th>
+                <th pSortableColumn="email" style="min-width:15rem">UserEmail<p-sortIcon field="UserEmail"></p-sortIcon></th>
+                <th pSortableColumn="complaintID" style="min-width:10rem">ComplaintID<p-sortIcon field="complaintID"></p-sortIcon></th>
+                <th pSortableColumn="complaintTitle" style="min-width:15rem">ComplaintTitle<p-sortIcon field="complaintTitle"></p-sortIcon></th>
+                <th pSortableColumn="complaintDescription" style="min-width:15rem">ComplaintDescription<p-sortIcon field="complaintDescription"></p-sortIcon></th>
+                <th pSortableColumn="status" style="min-width:10rem">Status<p-sortIcon field="status"></p-sortIcon></th>
+                <th> </th>
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                </td>
+                <td>{{ product.id }} </td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.userId }}</td>  
+                <td>{{ product.userEmail }}</td>
+                <td>{{ product.complaintId }}</td>
+                <td>{{ product.complaintTitle }}</td>
+                <td>{{ product.complaintDescription }}</td>
+                <td>{{ product.status }}</td>
+
+                <td class="flex flex-direction-row">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">In total there are {{ products ? products.length : 0 }} Complaints.</div>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog [(visible)]="productDialog" [style]="{ width: '450px' }" header="Raise Complaint Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="name">Complaint Title</label>
+            <input type="text" pInputText id="complaintTitle" [(ngModel)]="product.complaintTitle" required autofocus />
+            <small class="p-error" *ngIf="submitted && !product.complaintTitle">Complaint Title is required.</small>
+        </div>
+        <div class="field">
+            <label for="description">Complaint Description</label>
+            <textarea id="complaintDescription" pInputTextarea [(ngModel)]="product.complaintDescription" required rows="3" cols="20"></textarea>
+            <small class="p-error" *ngIf="submitted && !product.complaintDescription">Complaint Description is required.</small>
+        </div>
+        <div class="field">
+            <label for="name">Complaint Id</label>
+            <input type="text" pInputText id="complaintId" [(ngModel)]="product.complaintId" required autofocus />
+            <small class="p-error" *ngIf="submitted && !product.complaintId">Complaint Id is required.</small>
+        </div>
+        <div class="field">
+            <label for="name">User Id</label>
+            <input type="text" pInputText id="userId" [(ngModel)]="product.userId" required autofocus />
+            <small class="p-error" *ngIf="submitted && !product.userId">user Id is required.</small>
+        </div>
+        <div class="field">
+            <label for="name">User Email</label>
+            <input type="text" pInputText Email="userEmail" [(ngModel)]="product.userEmail" required autofocus />
+            <small class="p-error" *ngIf="submitted && !product.userEmail">user Email is required.</small>
+        </div>
+        <div class="field">
+            <label for="name">Complaint Title</label>
+            <input type="text" pInputText id="complaintTitle" [(ngModel)]="product.complaintTitle" required autofocus />
+            <small class="p-error" *ngIf="submitted && !product.complaintTitle">Complaint Title is required.</small>
+        </div>
+        <div class="field">
+            <label class="mb-3">Complaint Category</label>
+            <div class="formgrid grid">
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="category1" name="category" value="Human Resources" [(ngModel)]="product.category"></p-radioButton>
+                    <label for="category1">Human Resources</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="category2" name="category" value="IT Department" [(ngModel)]="product.category"></p-radioButton>
+                    <label for="category2">IT Department</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="category3" name="category" value="Women Safety" [(ngModel)]="product.category"></p-radioButton>
+                    <label for="category3">Women Safety</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="category4" name="category" value="General Issue" [(ngModel)]="product.category"></p-radioButton>
+                    <label for="category4">General Issue</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                        <p-radioButton id="category4" name="category" value="Teams Issue" [(ngModel)]="product.category"></p-radioButton>
+                        <label for="category4">Teams Issue</label>
+                    </div>
+                    <div class="field-radiobutton col-6">
+                        <p-radioButton id="category4" name="category" value="Others" [(ngModel)]="product.category"></p-radioButton>
+                        <label for="category4">Others</label>
+                    </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="mb-3">Complaint Status</label>
+            <div class="formgrid grid">
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="category1" name="category" value="Under Discyssion" [(ngModel)]="product.category"></p-radioButton>
+                    <label for="category1">Under Discussion</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="category2" name="category" value="Complaint Done" [(ngModel)]="product.category"></p-radioButton>
+                    <label for="category2">Complaint Done</label>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
