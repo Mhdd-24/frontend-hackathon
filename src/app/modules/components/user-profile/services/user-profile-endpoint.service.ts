@@ -15,7 +15,7 @@ import { EmployeeResponse } from '../models/EmployeeTable.models';
 export class UserProfileEndpointService extends EndpointBase {
    saveEmployeeURL() { return this.configuration.baseUrl + '/employees'; }
    employeeDetailsURL() { return this.configuration.baseUrl + '/employees' }
-
+   
   constructor(private configuration: ConfigurationService, http: HttpClient, authService: AuthService) {
     super(http, authService);
   }
@@ -29,7 +29,10 @@ export class UserProfileEndpointService extends EndpointBase {
     )
   }
 
+
   getEmployeeDetailsEndPoint(): Observable<EmployeeResponse[]>{
     return this.http.get<EmployeeResponse[]>(this.employeeDetailsURL());
   }
+
+  
 }
