@@ -258,7 +258,7 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    return this.currentUser != null;
+    return this.currentUser?.email != null;
   }
 
   get rememberMe(): boolean {
