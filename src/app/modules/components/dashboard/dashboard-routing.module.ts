@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 
-const routes: Routes = [{ path: 'studio-overview', loadChildren: () => import('./studio-overview/studio-overview.module').then(m => m.StudioOverviewModule) }];
+const routes: Routes = [{ path: 'dashboard-overview', loadChildren: () => import('./studio-overview/studio-overview.module').then(m => m.StudioOverviewModule) }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
