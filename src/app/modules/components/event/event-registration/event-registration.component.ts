@@ -278,7 +278,7 @@ export class EventRegistrationComponent {
         this.attandance = event.attendance;
         this.totalAttandance = event.attendance.length;
         this.totalAttanees = event.attendees.length;
-        this.averageRating = event.attendance.reduce((acc, attendee) => acc + parseInt(attendee.rating), 0) / event.attendance.length;
+        this.averageRating = (event.attendance.reduce((acc, attendee) => acc + parseInt(attendee.rating), 0) )/ (event.attendance.length == 0 ? 1 : event.attendance.length);
         console.log(this.averageRating);
         this.pendingBudget = event.remainingBudget;
 
