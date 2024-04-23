@@ -24,7 +24,7 @@
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
                 <h5 class="m-0">Raise Complaint List</h5>
-               
+
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -51,16 +51,17 @@
                 </td>
                 <td>{{ product.id }} </td>
                 <td>{{ product.category }}</td>
-                <td>{{ product.userId }}</td>  
+                <td>{{ product.userId }}</td>
                 <td>{{ product.userEmail }}</td>
                 <td>{{ product.complaintId }}</td>
                 <td>{{ product.complaintTitle }}</td>
                 <td>{{ product.complaintDescription }}</td>
                 <td>{{ product.status }}</td>
 
-                <td class="flex flex-direction-row">
+                <td class="flex flex-direction-row justify-content-evenly gap-2">
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-code" class="p-button-rounded p-button-danger "(click)="deleteProduct(product)"></button>
                 </td>
             </tr>
         </ng-template>
@@ -97,11 +98,6 @@
             <small class="p-error" *ngIf="submitted && !product.userEmail">user Email is required.</small>
         </div>
         <div class="field">
-            <label for="name">Complaint Title</label>
-            <input type="text" pInputText id="complaintTitle" [(ngModel)]="product.complaintTitle" required autofocus />
-            <small class="p-error" *ngIf="submitted && !product.complaintTitle">Complaint Title is required.</small>
-        </div>
-        <div class="field">
             <label class="mb-3">Complaint Category</label>
             <div class="formgrid grid">
                 <div class="field-radiobutton col-6">
@@ -134,8 +130,8 @@
             <label class="mb-3">Complaint Status</label>
             <div class="formgrid grid">
                 <div class="field-radiobutton col-6">
-                    <p-radioButton id="category1" name="category" value="Under Discyssion" [(ngModel)]="product.category"></p-radioButton>
-                    <label for="category1">Under Discussion</label>
+                    <p-radioButton id="category1" name="category" value="Under Discyssion" [(ngModel)]="product.status"></p-radioButton>
+                    <label for="status1">Under Discussion</label>
                 </div>
                 <div class="field-radiobutton col-6">
                     <p-radioButton id="category2" name="category" value="Complaint Done" [(ngModel)]="product.category"></p-radioButton>

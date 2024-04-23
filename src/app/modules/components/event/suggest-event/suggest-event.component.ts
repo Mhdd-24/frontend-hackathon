@@ -19,8 +19,8 @@ export class SuggestEventComponent {
     {
       id: '1000',
       code: 'f230fh0g3',
-      name: 'Bamboo Watch',
-      description: 'Product Description',
+      name: 'Football Event',
+      description: 'Football is one of the oldest sports globally, which is played between two teams using only one football.',
       image: 'bamboo-watch.jpg',
       price: 65,
       category: 'Accessories',
