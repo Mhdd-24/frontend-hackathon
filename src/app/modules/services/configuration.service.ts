@@ -91,7 +91,7 @@ export class ConfigurationService {
 
   // ***Specify default configurations here***
   public static readonly defaultLanguage = 'en';
-  public static readonly defaultHomeUrl = '/dashboard/studio-overview';
+  public static readonly defaultHomeUrl = '/dashboard/dashboard-overview';
   public static readonly defaultThemeId = 1;
   public static readonly defaultShowDashboardStatistics = true;
   public static readonly defaultShowDashboardNotifications = true;

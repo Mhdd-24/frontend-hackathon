@@ -12,7 +12,7 @@
                             </span>
                         </div>
                     </ng-template>
-    
+
                     <ng-template let-foods pTemplate="gridItem">
                         <div class="grid grid-nogutter">
                             <div class="col-12 md:col-4" *ngFor="let food of foods">
@@ -21,7 +21,7 @@
                                         <span class="font-semibold">{{food.name}}</span>
                                     </div>
                                     <div class="flex flex-column align-items-center text-center mb-3">
-                                        <img [src]="'assets/demo/images/food/' + food.image" [alt]="food.name"
+                                        <img [src]="'assets/demo/images/food/' + food.image" [alt]="food.name" width="100px" height="100px"
                                             class="w-9 shadow-2 my-3 mx-0" />
                                         <div class="font-bold text-2xl">{{food.name}}</div>
                                         <div class="mb-3">{{food.description}}</div>
@@ -44,4 +44,3 @@
             </div>
         </div>
     </div>
-    
