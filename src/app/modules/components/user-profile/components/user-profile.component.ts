@@ -40,15 +40,15 @@ export class UserProfileComponent implements OnInit {
     console.log(this.authService.currentUser);
     this.employeeForm = this.fb.group({
       empid: [''],
-      name: ['Jaeson Karter', Validators.required],
+      name: ['', Validators.required],
       email: [this.authService.currentUser?.email, [Validators.required, Validators.email]],
-      department: [{ value: 'IT', viewValue: 'IT' }, Validators.required],
-      designation: ['Software Engineer', Validators.required],
-      dob: ['06/15/1990', Validators.required],
-      doj: ['04/04/2022', Validators.required],
-      address: ['Juliee Illam, Ragine Gandhi Lane, Maradu, Kochi, 682393', Validators.required],
-      mobileno: [9946655526, Validators.required],
-      userId: ['jaeson.karter', Validators.required],
+      department: [{ value: '', viewValue: '' }, Validators.required],
+      designation: ['', Validators.required],
+      dob: ['', Validators.required],
+      doj: ['', Validators.required],
+      address: ['', Validators.required],
+      mobileno: [null, Validators.required],
+      userId: ['', Validators.required],
       employeeExperience: this.fb.array([
         this.fb.group({
           companyName: new FormControl<string | null>(null),
