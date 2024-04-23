@@ -34,6 +34,54 @@
                 <label htmlFor="address">Address</label>
                 <textarea formControlName="address" pInputTextarea id="address"></textarea>
             </div>
+            <div class="col-12">
+                <div formArrayName="employeeExperience" class="grid">
+                    <div *ngFor="let branch of employeeExperience.controls; index as i"
+                        class="fadeinleft fadeout  animation-duration-500 animation-ease-in-out p-inputgroup p-fluid col-11">
+                        <span [formGroupName]="i" class="p-input-icon-left mx-1">
+                            <i class="font-bold">{{i+1}}</i>
+                            <input formControlName="companyName" type="text" pInputText
+                                placeholder="Enter Company Name" />
+                        </span>
+                        <span [formGroupName]="i" class="p-input-icon-left">
+                            <i class="font-bold">{{i+1}}</i>
+                            <input formControlName="domain" type="text" pInputText placeholder="Enter Domain" />
+                        </span>
+                        <span [formGroupName]="i" class="mx-1">
+                            <input type="number" formControlName="yearsOfExp" pInputText placeholder="years" />
+                        </span>
+
+                        <div class="ml-2">
+                            <p-button icon="pi pi-trash" (onClick)="removeEmployeeExperience(i)"></p-button>
+                        </div>
+                    </div>
+                    <div class="col-1 text-center">
+                        <p-button icon="pi pi-plus" pTooltip="Add Experience" tooltipPosition="top"
+                            (onClick)="newEmployeeExperience()"></p-button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div formArrayName="skillVsRating" class="grid">
+                    <div *ngFor="let branch of skillsVsRating.controls; index as i"
+                        class="fadeinleft fadeout  animation-duration-500 animation-ease-in-out p-inputgroup p-fluid col-11">
+                        <span [formGroupName]="i" class="p-input-icon-left">
+                            <i class="font-bold">{{i+1}}</i>
+                            <input formControlName="skill" type="text" pInputText placeholder="Enter Skill" />
+                        </span>
+                        <span [formGroupName]="i" class="p-input-icon-left mt-2 ml-2">
+                            <p-rating formControlName="rating" [cancel]="false" ></p-rating>
+                        </span>
+                        <div class="ml-2">
+                            <p-button icon="pi pi-trash" (onClick)="remvoeSkillsRating(i)"></p-button>
+                        </div>
+                    </div>
+                    <div class="col-1 text-center">
+                        <p-button icon="pi pi-plus" pTooltip="Add Skill Rating" tooltipPosition="top"
+                            (onClick)="newSkillsRating()"></p-button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="p-fluid p-formgrid grid">
             <div class="field col-12">

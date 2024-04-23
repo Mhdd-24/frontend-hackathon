@@ -8,6 +8,7 @@ import { Employee } from '../../leave-roster/models/leaveRoster.model';
 import { Observable, catchError } from 'rxjs';
 import { SaveEmployeeResponse } from '../../../models/login-response.model';
 import { EmployeeResponse } from '../models/EmployeeTable.models';
+import { EmployeeData } from '../../dashboard/types/dashboard.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class UserProfileEndpointService extends EndpointBase {
     super(http, authService);
   }
 
-  saveEmployeeEndpoint(employee: Employee): Observable<SaveEmployeeResponse> {
+  saveEmployeeEndpoint(employee: EmployeeData): Observable<SaveEmployeeResponse> {
     return this.http.post<SaveEmployeeResponse>(this.saveEmployeeURL(), JSON.stringify(employee), this.requestHeaders).pipe(
       catchError(error => {
         return this.handleError(error, () => this.saveEmployeeEndpoint(employee));

@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 import { Employee } from '../../leave-roster/models/leaveRoster.model';
 import { SaveEmployeeResponse } from '../../../models/login-response.model';
 import { EmployeeResponse } from '../models/EmployeeTable.models';
+import { EmployeeData } from '../../dashboard/types/dashboard.model';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class UserProfileService {
 
 
 
-  saveEmployee(employee: Employee): Observable<SaveEmployeeResponse> {
+  saveEmployee(employee: EmployeeData): Observable<SaveEmployeeResponse> {
     return this.userProfileEndPointService.saveEmployeeEndpoint(employee).pipe<SaveEmployeeResponse>(map(res => {
       return res;
     }));
