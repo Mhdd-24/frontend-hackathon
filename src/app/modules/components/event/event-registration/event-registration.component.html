@@ -88,8 +88,8 @@
                 </div>
                 <div class="field col-12 md:col-3">
                     <label htmlFor="eventToDate">Event End</label>
-                    <p-calendar formControlName="eventToDate" [showIcon]="true" [showButtonBar]="true" id="eventToDate"  hourFormat="12"
-                        [showTime]="true"></p-calendar>
+                    <p-calendar formControlName="eventToDate" [showIcon]="true" [showButtonBar]="true" id="eventToDate"
+                        hourFormat="12" [showTime]="true"></p-calendar>
                 </div>
                 <div class="field col-12">
                     <label htmlFor="eventDescription">Event Description</label>
@@ -212,7 +212,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-product>
                     <tr>
-               
+
                         <td>{{ product.employee.email}}</td>
                     </tr>
                 </ng-template>
@@ -240,13 +240,13 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                       
+
                         <th pSortableColumn="email">Attendees Email <p-sortIcon field="email"></p-sortIcon></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-product>
                     <tr>
-                       
+
                         <td>{{ product.employee.email}}</td>
                     </tr>
                 </ng-template>
@@ -279,7 +279,12 @@
     </p-accordion>
 </div>
 
+
 <div class="card">
+    <p-toast></p-toast>
+    <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUploadPicture($event)"
+        styleClass="mb-1" [multiple]="true" accept="image/*" [maxFileSize]="100000000000">
+    </p-fileUpload>
     <div *ngIf="images" class="grid" style="max-width: 800px;">
         <div *ngFor="let image of images; let index = index" class="col-3" key="index">
             <img [src]="image.thumbnailImageSrc" [alt]="image.alt" style="cursor: pointer"
@@ -293,5 +298,15 @@
             <img [src]="item.itemImageSrc" style="width: 100%; display: block;" />
         </ng-template>
     </p-galleria>
+
+    <div class="image-grid">
+        <div *ngFor="let image of imagesFiles" class="image-container">
+            <img [src]="image" class="image" />
+        </div>
+    </div>
+
+
 </div>
 }
+
+

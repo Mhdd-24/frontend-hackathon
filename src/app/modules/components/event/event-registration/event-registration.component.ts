@@ -41,104 +41,110 @@ export class EventRegistrationComponent {
   totalAttanees = 0;
   averageRating = 0;
   pendingBudget = 0;
-  uploadedFiles: string[] = [];
+  uploadedFiles: any[] = [];
+  imagesFiles : string[] = [];
 
   displayCustom: boolean | undefined;
 
   activeIndex: number = 0;
 
-  images: any[] | undefined =[
+  displayCustom2: boolean | undefined;
+
+  activeIndex2: number = 0;
+
+
+  images: any[] | undefined = [
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1s.jpg',
-        alt: 'Description for Image 1',
-        title: 'Title 1'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1s.jpg',
+      alt: 'Description for Image 1',
+      title: 'Title 1'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2s.jpg',
-        alt: 'Description for Image 2',
-        title: 'Title 2'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2s.jpg',
+      alt: 'Description for Image 2',
+      title: 'Title 2'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3s.jpg',
-        alt: 'Description for Image 3',
-        title: 'Title 3'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3s.jpg',
+      alt: 'Description for Image 3',
+      title: 'Title 3'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria4.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria4s.jpg',
-        alt: 'Description for Image 4',
-        title: 'Title 4'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria4.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria4s.jpg',
+      alt: 'Description for Image 4',
+      title: 'Title 4'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria5.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria5s.jpg',
-        alt: 'Description for Image 5',
-        title: 'Title 5'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria5.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria5s.jpg',
+      alt: 'Description for Image 5',
+      title: 'Title 5'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria6.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria6s.jpg',
-        alt: 'Description for Image 6',
-        title: 'Title 6'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria6.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria6s.jpg',
+      alt: 'Description for Image 6',
+      title: 'Title 6'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria7.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria7s.jpg',
-        alt: 'Description for Image 7',
-        title: 'Title 7'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria7.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria7s.jpg',
+      alt: 'Description for Image 7',
+      title: 'Title 7'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria8.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria8s.jpg',
-        alt: 'Description for Image 8',
-        title: 'Title 8'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria8.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria8s.jpg',
+      alt: 'Description for Image 8',
+      title: 'Title 8'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria9.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria9s.jpg',
-        alt: 'Description for Image 9',
-        title: 'Title 9'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria9.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria9s.jpg',
+      alt: 'Description for Image 9',
+      title: 'Title 9'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria10.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria10s.jpg',
-        alt: 'Description for Image 10',
-        title: 'Title 10'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria10.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria10s.jpg',
+      alt: 'Description for Image 10',
+      title: 'Title 10'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria11.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria11s.jpg',
-        alt: 'Description for Image 11',
-        title: 'Title 11'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria11.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria11s.jpg',
+      alt: 'Description for Image 11',
+      title: 'Title 11'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria12.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria12s.jpg',
-        alt: 'Description for Image 12',
-        title: 'Title 12'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria12.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria12s.jpg',
+      alt: 'Description for Image 12',
+      title: 'Title 12'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria13.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria13s.jpg',
-        alt: 'Description for Image 13',
-        title: 'Title 13'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria13.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria13s.jpg',
+      alt: 'Description for Image 13',
+      title: 'Title 13'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria14.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria14s.jpg',
-        alt: 'Description for Image 14',
-        title: 'Title 14'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria14.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria14s.jpg',
+      alt: 'Description for Image 14',
+      title: 'Title 14'
     },
     {
-        itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria15.jpg',
-        thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria15s.jpg',
-        alt: 'Description for Image 15',
-        title: 'Title 15'
+      itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria15.jpg',
+      thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria15s.jpg',
+      alt: 'Description for Image 15',
+      title: 'Title 15'
     }
-];
+  ];
 
   responsiveOptions: any[] = [
     {
@@ -230,6 +236,7 @@ export class EventRegistrationComponent {
         })
 
       ]),
+      eventAttendanceQRCode: new FormControl<string | null>(null),
     })
 
 
@@ -247,7 +254,7 @@ export class EventRegistrationComponent {
           isSnacks: this.isSnacks.find(snacks => snacks.value === event.snacks),
           needVolunteer: this.needVolunteer.find(volunteer => volunteer.value === event.needVolunteer),
           expenses: null,
-          status : this.Status.find(status => status.value === event.status)
+          status: this.Status.find(status => status.value === event.status)
         });
 
         if (event.checkLists.length > 1) {
@@ -278,11 +285,14 @@ export class EventRegistrationComponent {
         this.attandance = event.attendance;
         this.totalAttandance = event.attendance.length;
         this.totalAttanees = event.attendees.length;
-        this.averageRating = event.attendance.reduce((acc, attendee) => acc + parseInt(attendee.rating), 0) / event.attendance.length;
-        console.log(this.averageRating);
+        this.imagesFiles = event.eventImages!;
+
+        console.log("Image", this.imagesFiles)
+
+        this.averageRating = (event.attendance.reduce((acc, attendee) => acc + parseInt(attendee.rating), 0)) / (event.attendance.length == 0 ? 1 : event.attendance.length);
+
         this.pendingBudget = event.remainingBudget;
 
-        console.log(this.volunteers);
 
 
       },
@@ -337,13 +347,11 @@ export class EventRegistrationComponent {
 
   load() {
     this.loading = true;
-    console.log("Form Values", this.eventRegisterForm.value);
     let expensesObj: any = {}
     this.eventRegisterForm.value.expenses.forEach((expense: any) => {
       expensesObj[expense.expense] = expense.amount;
     })
 
-    console.log(expensesObj);
 
     const eventFormData: EventRequest = {
       eventName: this.eventRegisterForm.value.eventName,
@@ -372,7 +380,7 @@ export class EventRegistrationComponent {
       attendance: [],
       attendees: [],
       volunteer: [],
-      eventAttendanceQRCode: "",
+      eventAttendanceQRCode: '',
       eventInvitationQRCode: "",
       eventQRCode: "",
       checkLists: this.eventRegisterForm.value.checkLists,
@@ -408,18 +416,17 @@ export class EventRegistrationComponent {
       attendance: this.attandance,
       attendees: this.attendees,
       volunteer: this.volunteers,
-      eventAttendanceQRCode: "",
+      eventAttendanceQRCode: this.eventRegisterForm.value.eventAttendanceQRCode,
       eventInvitationQRCode: "",
       eventQRCode: "",
       checkLists: this.eventRegisterForm.value.checkLists,
       isInternalEvent: true,
-      expenses: expensesObj
+      expenses: expensesObj,
+      eventImages : this.imagesFiles
     }
-    console.log(this.id!);
 
     this.eventService.saveEvent(this.id == null ? eventFormData : eventUpdateFormData).subscribe({
       next: (response) => {
-        console.log("Response", response);
         this.loading = false;
         if (!this.id) {
           this.resetForm();
@@ -442,7 +449,6 @@ export class EventRegistrationComponent {
 
   resetForm() {
     this.eventRegisterForm.reset();
-    console.log('Form reset');
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -464,27 +470,98 @@ export class EventRegistrationComponent {
   @ViewChild('dt') dt: Table | undefined;
 
   applyFilterGlobal($event: any, stringVal: any) {
-    console.log($event);
-    console.log(stringVal);
+
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  onUploadPicture(event: UploadEvent) {
-    for (let file of event.files) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const base64Data = e.target.result;
-        this.uploadedFiles.push(base64Data);
-        console.log(this.uploadedFiles)
-      };
-      reader.readAsDataURL(file);
+  onUploadPicture(event: any) {
 
+    const files: File[] = event.files;
+    const promises: Promise<string>[] = [];
+
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const promise = this.readFile(files[i]);
+        promises.push(promise);
+      }
     }
 
-    console.log("Base 64", this.uploadedFiles)
+    Promise.all(promises).then(base64Strings => {
+  
+      let expensesObj: any = {}
+      this.eventRegisterForm.value.expenses.forEach((expense: any) => {
+        expensesObj[expense.expense] = expense.amount;
+      })
+      this.uploadedFiles = base64Strings;
+      const eventUpdateFormData: EventRequest = {
+        eventId: this.id!,
+        eventName: this.eventRegisterForm.value.eventName,
+        eventDescription: this.eventRegisterForm.value.eventDescription,
+        eventFromDate: this.eventRegisterForm.value.eventFromDate,
+        eventToDate: this.eventRegisterForm.value.eventToDate,
+        eventLocation: this.eventRegisterForm.value.eventLocation,
+        organizer: {
+          empid: "",
+          name: this.eventRegisterForm.value.name,
+          email: '',
+        },
+        department: this.eventRegisterForm.value.department.value,
+        eventType: "Internal",
+        budget: this.eventRegisterForm.value.budget,
+        eventEndTime: "",
+        eventStartTime: "",
+        isInvitationRequired: false,
+        isSnacks: this.eventRegisterForm.value.isSnacks.value,
+        isVotable: this.eventRegisterForm.value.isVotable.value,
+        maxAttendees: 100,
+        needVolunteer: this.eventRegisterForm.value.needVolunteer.value,
+        remainingBudget: this.pendingBudget,
+        requiresRSVP: false,
+        status: this.eventRegisterForm.value.status.value,
+        attendance: this.attandance,
+        attendees: this.attendees,
+        volunteer: this.volunteers,
+        eventAttendanceQRCode: this.eventRegisterForm.value.eventAttendanceQRCode,
+        eventInvitationQRCode: "",
+        eventQRCode: "",
+        checkLists: this.eventRegisterForm.value.checkLists,
+        isInternalEvent: true,
+        expenses: expensesObj,
+        eventImages : base64Strings
+      }
+      console.log(this.id!);
 
+      this.eventService.saveEvent(eventUpdateFormData).subscribe({
+        next: (response) => {
+          console.log("Response", response);
+          this.loading = false;
+          if (!this.id) {
+            this.resetForm();
+            this.toastService.showSuccessToast("Event Created Successfully", "Event ID " + response.eventId);
+          } else {
+            this.toastService.showSuccessToast("Event Updated Successfully", "Event ID " + response.eventId);
+          }
 
+        },
+        error: (error) => {
+          console.log("Error", error);
+          this.loading = false;
+          this.toastService.showErrorToast("Error", "Event Registration Failed");
+        }
+      })
+    });
+  }
 
+  readFile(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64String = reader.result as string;
+        resolve(base64String);
+      };
+      reader.onerror = error => reject(error);
+    });
   }
 
   imageClick(index: number) {

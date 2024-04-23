@@ -46,6 +46,7 @@ export interface EventRequest {
     remainingBudget: number;
     expenses: Expenses[];
     checkLists: CheckList[];
+    eventImages?  : string[]
 
 }
 
@@ -102,6 +103,7 @@ export interface AllEventsResponse {
     internalEvent: boolean;
     snacks: boolean;
     votable: boolean;
+    eventImages?  : string[]
 }
 
 export interface EventUpdateBody {
