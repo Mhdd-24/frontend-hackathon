@@ -54,7 +54,7 @@
                 <div>
                     <span class="block text-500 font-medium mb-3">Birthday Buddies</span>
                     @for (item of dashboardData.data.employeesDob; track $index) {
-                    <div class="text-900 font-medium text-xl">{{item}}</div>
+                    <div class="text-900 font-medium text-xl">{{item.name}}</div>
                     } @empty{
                     <div class="text-900 font-medium text-xl">0</div>
                     }
@@ -144,10 +144,8 @@
                         class="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0">
                         <i class="pi pi-dollar text-xl text-blue-500"></i>
                     </div>
-                    <span class="text-900 line-height-3">Jaeson Karter
-                        <span class="text-700"> has Volunteered to cancer cause for <span
-                                class="text-blue-500">79,000</span></span>
-                    </span>
+                    <span class="text-700 line-height-3">Jaeson is having <span
+                        class="text-blue-500 font-medium">Snacks</span> on his desk.</span>
                 </li>
                 <li class="flex align-items-center py-2">
                     <div

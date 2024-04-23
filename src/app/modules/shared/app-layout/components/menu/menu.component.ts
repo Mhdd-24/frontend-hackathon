@@ -71,8 +71,8 @@ export class MenuComponent implements OnInit {
       {
         label: 'Employee Details',
         items: [
-          { label: 'EmployeeDetails', icon: 'pi pi-fw pi-table', routerLink: ['/userProfile/employeeDetails'] },
-          { label: 'RaiseComplaint', icon: 'pi pi-fw pi-send', routerLink: ['/userProfile/raiseComplaint'] },
+          { label: 'Employee Details', icon: 'pi pi-fw pi-table', routerLink: ['/userProfile/employeeDetails'] },
+          { label: 'Raise Complaint', icon: 'pi pi-fw pi-send', routerLink: ['/userProfile/raiseComplaint'] },
 
         ]
       }

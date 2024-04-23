@@ -172,6 +172,13 @@ export class EventRegistrationComponent {
     { value: 'SFDC', viewValue: 'SFDC' }
   ];
 
+  Status: Department[] = [
+    { value: 'Active', viewValue: 'ACTIVE' },
+    { value: 'CLOSED', viewValue: 'CLOSED' },
+    { value: 'COMPLETED', viewValue: 'COMPLETED' },
+    { value: 'CANCELLED', viewValue: 'CANCELLED' },
+  ];
+
   isVotable: BooleanOption[] = [
     { value: true, viewValue: 'Yes' },
     { value: false, viewValue: 'No' }
@@ -208,6 +215,7 @@ export class EventRegistrationComponent {
       isVotable: new FormControl<BooleanOption | null>(null, [Validators.required]),
       isSnacks: new FormControl<BooleanOption | null>(null, [Validators.required]),
       needVolunteer: new FormControl<BooleanOption | null>(null, [Validators.required]),
+      status: new FormControl<string | null>(null, [Validators.required]),
       checkLists: this.formBuilder.array([
         this.formBuilder.group({
           checklistDescription: new FormControl<string | null>(null),
@@ -238,7 +246,8 @@ export class EventRegistrationComponent {
           isVotable: this.isVotable.find(votable => votable.value === event.votable),
           isSnacks: this.isSnacks.find(snacks => snacks.value === event.snacks),
           needVolunteer: this.needVolunteer.find(volunteer => volunteer.value === event.needVolunteer),
-          expenses: null
+          expenses: null,
+          status : this.Status.find(status => status.value === event.status)
         });
 
         if (event.checkLists.length > 1) {
@@ -271,7 +280,7 @@ export class EventRegistrationComponent {
         this.totalAttanees = event.attendees.length;
         this.averageRating = event.attendance.reduce((acc, attendee) => acc + parseInt(attendee.rating), 0) / event.attendance.length;
         console.log(this.averageRating);
-        this.pendingBudget = event.budget - event.remainingBudget;
+        this.pendingBudget = event.remainingBudget;
 
         console.log(this.volunteers);
 
@@ -359,7 +368,7 @@ export class EventRegistrationComponent {
       needVolunteer: this.eventRegisterForm.value.needVolunteer.value,
       remainingBudget: 0,
       requiresRSVP: false,
-      status: "Active",
+      status: this.eventRegisterForm.value.status.value,
       attendance: [],
       attendees: [],
       volunteer: [],
@@ -395,7 +404,7 @@ export class EventRegistrationComponent {
       needVolunteer: this.eventRegisterForm.value.needVolunteer.value,
       remainingBudget: this.pendingBudget,
       requiresRSVP: false,
-      status: "Active",
+      status: this.eventRegisterForm.value.status.value,
       attendance: this.attandance,
       attendees: this.attendees,
       volunteer: this.volunteers,
