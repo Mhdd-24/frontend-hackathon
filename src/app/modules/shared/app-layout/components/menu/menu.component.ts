@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
       {
         label: 'Dashboard', items: [
           {
-            label: 'Overview', icon: 'pi pi-fw pi-briefcase', routerLink: ['/dashboard/studio-overview'],
+            label: 'Overview', icon: 'pi pi-fw pi-briefcase', routerLink: ['/dashboard/dashboard-overview'],
           },
         ]
       },
@@ -52,7 +52,7 @@ export class MenuComponent implements OnInit {
           {
             label: 'Fetch Leave', icon: 'pi pi-fw pi-shopping-bag', routerLink: ['/leaveRoster/uploadLeaves'],
           },
-         
+
         ]
 
       },
@@ -71,8 +71,8 @@ export class MenuComponent implements OnInit {
       {
         label: 'Employee Details',
         items: [
-          { label: 'EmployeeDetails', icon: 'pi pi-fw pi-table', routerLink: ['/userProfile/employeeDetails'] },
-          { label: 'RaiseComplaint', icon: 'pi pi-fw pi-send', routerLink: ['/userProfile/raiseComplaint'] },
+          { label: 'Employee Details', icon: 'pi pi-fw pi-table', routerLink: ['/userProfile/employeeDetails'] },
+          { label: 'Raise Complaint', icon: 'pi pi-fw pi-send', routerLink: ['/userProfile/raiseComplaint'] },
 
         ]
       }

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: new FormControl<string>('jaeson.karter@bajajfinserv.in', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(50)]),
+      username: new FormControl<string>('jaeson.karter@gmail.in', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(50)]),
       password: new FormControl<string>('Pass@123', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
       rememberMe: new FormControl<boolean>(false)
     });

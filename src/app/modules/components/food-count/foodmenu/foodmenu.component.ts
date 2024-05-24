@@ -18,7 +18,7 @@ export class FoodMenuComponent {
       "code": "f230fh0g3",
       "name": "Dosa Sambar",
       "description": "Rice Flour Batter",
-      "image": "Dosa.jpg",
+      "image": "Dosa.jpeg",
       "price": 65,
     },
     {
@@ -26,7 +26,7 @@ export class FoodMenuComponent {
       "code": "nvklal433",
       "name": "Idli",
       "description": "Rice Flour Batter",
-      "image": "Idli.jpg",
+      "image": "Idli.jpeg",
       "price": 30,
     },
     {
@@ -34,7 +34,7 @@ export class FoodMenuComponent {
       "code": "zz21cz3c1",
       "name": "Panner Masala",
       "description": "Panner, Butter, Masala",
-      "image": "PannerMasala.jpg",
+      "image": "PannerMasala.jpeg",
       "price": 100,
     },
     {
@@ -42,7 +42,7 @@ export class FoodMenuComponent {
       "code": "244wgerg2",
       "name": "Samosa",
       "description": "Maida Flour Batter",
-      "image": "Samosa.jpg",
+      "image": "Samosa.jpeg",
       "price": 25,
     },
     {
@@ -50,7 +50,7 @@ export class FoodMenuComponent {
       "code": "h456wer53",
       "name": "AaloRoti",
       "description": "Roti, Aalo Masala",
-      "image": "AaloRoti.jpg",
+      "image": "AaloRoti.jpeg",
       "price": 10,
     },
     {
@@ -58,7 +58,7 @@ export class FoodMenuComponent {
       "code": "av2231fwg",
       "name": "FrenchFries",
       "description": "Aalo Fry, Sauce",
-      "image": "FrenchFries.jpg",
+      "image": "FrenchFries.jpeg",
       "price": 75,
     },
     {
@@ -66,7 +66,7 @@ export class FoodMenuComponent {
       "code": "bib36pfvm",
       "name": "Fruits Salad",
       "description": "Fruits",
-      "image": "FruitsSalad.jpg",
+      "image": "FruitsSalad.jpeg",
       "price": 60,
     },
     {
@@ -74,7 +74,7 @@ export class FoodMenuComponent {
       "code": "mbvjkgip5",
       "name": "Dal Masala",
       "description": "Dal",
-      "image": "Dal.jpg",
+      "image": "Dal.jpeg",
       "price": 50,
     },
     {
@@ -82,7 +82,7 @@ export class FoodMenuComponent {
       "code": "vbb124btr",
       "name": "Cake",
       "description": "Eggless, Creamy",
-      "image": "Cake.jpg",
+      "image": "Cake.jpeg",
       "price": 45,
     },
     {
@@ -90,7 +90,7 @@ export class FoodMenuComponent {
       "code": "cm230f032",
       "name": "Chicken Strips",
       "description": "Chicken, Bread",
-      "image": "ChickenStrips.jpg",
+      "image": "ChickenStrips.jpeg",
       "price": 120,
     },
     {
@@ -98,7 +98,7 @@ export class FoodMenuComponent {
       "code": "f230fh0g3",
       "name": "Pasta",
       "description": "Pasta, Vegetables",
-      "image": "Pasta.jpg",
+      "image": "Pasta.jpeg",
       "price": 100,
     },
     {
@@ -106,7 +106,7 @@ export class FoodMenuComponent {
       "code": "nvklal433",
       "name": "Tamarind Rice",
       "description": "Tamarind, Rice",
-      "image": "TamarindRice.jpg",
+      "image": "TamarindRice.jpeg",
       "price": 45,
     },
     {
@@ -114,7 +114,7 @@ export class FoodMenuComponent {
       "code": "zz21cz3c1",
       "name": "Chicken Burger",
       "description": "Chicken, Bread, Salad",
-      "image": "Burger.jpg",
+      "image": "Burger.jpeg",
       "price": 90,
     },
     {
@@ -122,7 +122,7 @@ export class FoodMenuComponent {
       "code": "244wgerg2",
       "name": "Chicken Briyani",
       "description": "Chicken, Rice",
-      "image": "Briyani.jpg",
+      "image": "Briyani.jpeg",
       "price": 120,
     },
     {
@@ -130,7 +130,7 @@ export class FoodMenuComponent {
       "code": "h456wer53",
       "name": "Gulab Jamun",
       "description": "Gulab Wheat Batter, Sugar",
-      "image": "GulabJamun.jpg",
+      "image": "GulabJamun.jpeg",
       "price": 15,
     },
     {
@@ -138,7 +138,7 @@ export class FoodMenuComponent {
       "code": "av2231fwg",
       "name": "Vada Pav",
       "description": "Bread, Aalo, Chilli",
-      "image": "VadaPav.jpg",
+      "image": "VadaPav.jpeg",
       "price": 20,
     },
     {
@@ -146,7 +146,7 @@ export class FoodMenuComponent {
       "code": "bib36pfvm",
       "name": "Pani Puri",
       "description": "Masala Water, Aalo",
-      "image": "PaniPuri.jpg",
+      "image": "PaniPuri.jpeg",
       "price": 25,
     },
     {
@@ -154,7 +154,7 @@ export class FoodMenuComponent {
       "code": "mbvjkgip5",
       "name": "Veg Pulao",
       "description": "Rice, Vegetables",
-      "image": "VegPulao.jpg",
+      "image": "VegPulao.jpeg",
       "price": 40,
     },
     {
@@ -162,7 +162,7 @@ export class FoodMenuComponent {
       "code": "vbb124btr",
       "name": "Porotta",
       "description": "Maida Batter",
-      "image": "Porotta.jpg",
+      "image": "Porotta.jpeg",
       "price": 12,
     },
     {
@@ -170,7 +170,7 @@ export class FoodMenuComponent {
       "code": "cm230f032",
       "name": "Chenna Masala",
       "description": "Chenna",
-      "image": "ChennaMasala.jpg",
+      "image": "ChennaMasala.jpeg",
       "price": 85,
     },
     {
@@ -178,7 +178,7 @@ export class FoodMenuComponent {
       "code": "zz21cz3c1",
       "name": "Chai",
       "description": "Milk, Sugar, Tea Powder",
-      "image": "Chai.jpg",
+      "image": "Chai.jpeg",
       "price": 10,
     },
     {
@@ -186,7 +186,7 @@ export class FoodMenuComponent {
       "code": "244wgerg2",
       "name": "Unlimited Veg Meals",
       "description": "Variety Masala, Rice, Papads, Sweets",
-      "image": "VegMeals.jpg",
+      "image": "VegMeals.jpeg",
       "price": 150,
     },
     {
@@ -194,7 +194,7 @@ export class FoodMenuComponent {
       "code": "h456wer53",
       "name": "Breakfast Combo",
       "description": "Idli, Vada, Banana",
-      "image": "BreakfastCombo.jpg",
+      "image": "BreakfastCombo.jpeg",
       "price": 75,
     },
     {
@@ -202,7 +202,7 @@ export class FoodMenuComponent {
       "code": "av2231fwg",
       "name": "Orange Juice",
       "description": "Orange",
-      "image": "OrangeJuice.jpg",
+      "image": "OrangeJuice.jpeg",
       "price": 50,
     },
     {
@@ -210,7 +210,7 @@ export class FoodMenuComponent {
       "code": "bib36pfvm",
       "name": "Green Apple Juice",
       "description": "Apple",
-      "image": "GreenAppleJuice.jpg",
+      "image": "GreenAppleJuice.jpeg",
       "price": 60,
     },
     {
@@ -218,7 +218,7 @@ export class FoodMenuComponent {
       "code": "MilkShake",
       "name": "Rusks",
       "description": "Milk, Fruits",
-      "image": "MilkShake.jpg",
+      "image": "MilkShake.jpeg",
       "price": 55,
     },
     {
@@ -226,7 +226,7 @@ export class FoodMenuComponent {
       "code": "cm230f032",
       "name": "Corn Strips",
       "description": "Corn, Maida Batter",
-      "image": "CornStrips.jpg",
+      "image": "CornStrips.jpeg",
       "price": 40,
     },
     {
@@ -234,7 +234,7 @@ export class FoodMenuComponent {
       "code": "f230fh0g3",
       "name": "Cookies",
       "description": "Rice Flour Batter",
-      "image": "Cookies.jpg",
+      "image": "Cookies.jpeg",
       "price": 5,
     },
     {
@@ -242,7 +242,7 @@ export class FoodMenuComponent {
       "code": "nvklal433",
       "name": "Egg",
       "description": "Egg",
-      "image": "Egg.jpg",
+      "image": "Egg.jpeg",
       "price": 20,
     },
     {
@@ -250,7 +250,7 @@ export class FoodMenuComponent {
       "code": "zz21cz3c1",
       "name": "Chapathi",
       "description": "Wheat Flour Batter",
-      "image": "Chapathi.jpg",
+      "image": "Chapathi.jpeg",
       "price": 10,
     },
     {
@@ -258,7 +258,7 @@ export class FoodMenuComponent {
       "code": "244wgerg2",
       "name": "Sandwich",
       "description": "Bread, Salad",
-      "image": "Sandwich.jpg",
+      "image": "Sandwich.jpeg",
       "price": 55,
     }
   ]
@@ -272,7 +272,7 @@ export class FoodMenuComponent {
     private toastService: ToastService,
     private foodService: FoodService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   onFilter(dv: DataView, event: Event) {
     dv.filter((event.target as HTMLInputElement).value);
@@ -282,34 +282,34 @@ export class FoodMenuComponent {
     const currentTime = new Date();
     const closingTime = new Date(currentTime);
     closingTime.setHours(11, 0, 0, 0);
-  
+
     if (currentTime > closingTime) {
       this.disabledbutton = true;
       this.toastService.showErrorToast('Error', 'Orders are closed for the day.');
       return;
     }
-  
+
     const itemsInCart = this.foods.filter(food => food.quantity && food.quantity > 0);
-  
+
     if (itemsInCart.length > 0) {
       const foodItemWithQuantity: { [id: string]: number } = {};
-  
+
       for (const food of itemsInCart) {
         foodItemWithQuantity[food.name] = food.quantity || 0;
       }
-      
+
       const today = new Date();
       const day = today.getDate().toString().padStart(2, '0');
-      const month = (today.getMonth() + 1).toString().padStart(2, '0'); 
+      const month = (today.getMonth() + 1).toString().padStart(2, '0');
       const year = today.getFullYear();
       const formattedDate = `${day}/${month}/${year}`;
-  
+
       const foodCheckout: FoodCheckoutRequest = {
         date: formattedDate,
-        user: this.authService.currentUser?.email as string ,
+        user: this.authService.currentUser?.email as string,
         foodItemWithQuantity: foodItemWithQuantity
       };
-  
+
       this.foodService.checkoutFood(foodCheckout).subscribe({
         next: (response: FoodCheckoutRequest) => {
           console.log('Checkout Response:', response);
@@ -327,7 +327,7 @@ export class FoodMenuComponent {
       this.toastService.showErrorToast('Error', 'Please add items to the cart before checkout.');
     }
   }
-  
+
   addQuantity(food: Food): void {
     food.quantity = (food.quantity || 0) + 1;
   }

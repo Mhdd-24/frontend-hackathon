@@ -63,9 +63,9 @@ export class EventDetailsComponent implements OnInit {
 
   getSeverity(status: string) {
     switch (status) {
-      case 'DONE':
+      case 'COMPLETED':
         return 'success';
-      case 'PENDING':
+      case 'CLOSED':
         return 'warning';
       case 'CANCELLED':
         return 'danger';

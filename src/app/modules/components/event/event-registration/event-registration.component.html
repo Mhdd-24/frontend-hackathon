@@ -44,8 +44,8 @@
                     <i class="pi pi-inbox text-cyan-500 text-xl"></i>
                 </div>
             </div>
-            <span class="text-green-500 font-medium">520 </span>
-            <span class="text-500">felt better than last event</span>
+            <span class="text-green-500 font-medium">52 </span>
+            <span class="text-500">Employee have rated</span>
         </div>
     </div>
     <div class="col-12 lg:col-6 xl:col-3">
@@ -88,7 +88,7 @@
                 </div>
                 <div class="field col-12 md:col-3">
                     <label htmlFor="eventToDate">Event End</label>
-                    <p-calendar formControlName="eventToDate" [showIcon]="true" [showButtonBar]="true" id="eventToDate"
+                    <p-calendar formControlName="eventToDate" [showIcon]="true" [showButtonBar]="true" id="eventToDate"  hourFormat="12"
                         [showTime]="true"></p-calendar>
                 </div>
                 <div class="field col-12">
@@ -96,9 +96,15 @@
                     <textarea formControlName="eventDescription" pInputTextarea id="eventDescription" rows="2" cols="5"
                         [autoResize]="true"></textarea>
                 </div>
-                <div class="field col-12 md:col-6">
+                <div class="field col-12 md:col-3">
                     <label htmlFor="eventLocation">Venue</label>
                     <input formControlName="eventLocation" pInputText id="eventLocation" type="text" />
+                </div>
+
+                <div class="field col-12 md:col-3">
+                    <label htmlFor="status">Status</label>
+                    <p-dropdown formControlName="status" [options]="Status" optionLabel="viewValue"
+                        id="department"></p-dropdown>
                 </div>
 
                 <div class="field col-12 md:col-3">
@@ -200,15 +206,13 @@
                 </ng-template>
                 <ng-template pTemplate="header" class="col-12 lg:col-6 xl:col-3">
                     <tr>
-                        <th pSortableColumn="name" style="min-width:15rem">Volunteer Name <p-sortIcon
-                                field="name"></p-sortIcon>
-                        </th>
+
                         <th pSortableColumn="email">Volunteer Email <p-sortIcon field="email"></p-sortIcon></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-product>
                     <tr>
-                        <td>{{ product.employee.name }}</td>
+               
                         <td>{{ product.employee.email}}</td>
                     </tr>
                 </ng-template>
@@ -236,21 +240,19 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="name" style="min-width:15rem">Attendees Name <p-sortIcon
-                                field="name"></p-sortIcon>
-                        </th>
+                       
                         <th pSortableColumn="email">Attendees Email <p-sortIcon field="email"></p-sortIcon></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-product>
                     <tr>
-                        <td>{{ product.employee.name }}</td>
+                       
                         <td>{{ product.employee.email}}</td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="summary">
-                    <div class="flex align-items-center justify-content-between">In total there are {{ volunteers ?
-                        volunteers.length : 0 }} volunteers.</div>
+                    <div class="flex align-items-center justify-content-between">In total there are {{ attendees ?
+                        attendees.length : 0 }} Attendees.</div>
                 </ng-template>
             </p-table>
         </p-accordionTab>

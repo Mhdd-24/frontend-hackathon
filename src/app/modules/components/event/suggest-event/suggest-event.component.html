@@ -24,7 +24,7 @@
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
                 <h5 class="m-0">Manage Events Suggestions</h5>
-               
+
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -46,7 +46,7 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.category }}</td>
-                <td>
+                <td class="flex flex-direction row">
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
                 </td>

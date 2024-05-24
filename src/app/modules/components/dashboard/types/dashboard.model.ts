@@ -15,8 +15,8 @@ export interface DashboardData {
 }
 
 export interface EmployeeData {
-    id: string;
-    empid: string;
+    id?: string;
+    empid?: string;
     name: string;
     email: string;
     department: string;
