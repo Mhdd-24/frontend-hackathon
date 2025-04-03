@@ -1,27 +1,56 @@
-# Event Manager
+# Hackathon Project - Angular Application with PrimeNG
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+## Overview
+This project was developed during a hackathon, utilizing **Angular** as the frontend framework and **PrimeNG** as the UI component library. The goal was to create a responsive, efficient, and feature-rich web application within the given time constraints.
 
-## Development server
+## Features
+- **Angular Framework**: Structured component-based development.
+- **PrimeNG Integration**: Rich UI components for an enhanced user experience.
+- **Responsive Design**: Optimized for desktop and mobile devices.
+- **Performance Optimization**: Efficient data handling and rendering.
+- **Scalability**: Modular architecture for future enhancements.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Technologies Used
+- **Frontend**: Angular, TypeScript, PrimeNG
+- **Styling**: CSS, SCSS
+- **Build Tools**: Angular CLI
 
-## Code scaffolding
+## Installation & Setup
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Mhdd-24/Bajaj-Hackathon-FrontEnd.git
+   cd your-project-directory
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Run the application:
+   ```sh
+   ng serve
+   ```
+4. Open the application in your browser:
+   ```
+   http://localhost:4200
+   ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Project Structure
+```
+├── src
+│   ├── app
+│   │   ├── components  # UI Components
+│   │   ├── services    # API & Data Services
+│   │   ├── pages       # Application Pages
+│   ├── assets         # Static files
+│   ├── styles         # Global styles
+```
 
-## Build
+## Contribution
+Feel free to fork the repository and submit a pull request for any improvements.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## License
+This project is licensed under the MIT License.
 
-## Running unit tests
+---
+Developed by **Mohammed Rafi** during a Hackathon 🚀
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
