@@ -18,7 +18,7 @@ This project was developed during a hackathon, utilizing **Angular** as the fron
 ## Installation & Setup
 1. Clone the repository:
    ```sh
-   git clone https://github.com/Mhdd-24/Bajaj-Hackathon-FrontEnd.git
+   git clone https://github.com/Mhdd-24/frontend-hackathon.git
    cd your-project-directory
    ```
 2. Install dependencies:
